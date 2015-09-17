@@ -20,7 +20,7 @@ namespace CPP_sample
 	private:
 		void play_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
 		void start_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
-		VungleSDK::vungleSDK^ sdk;
+		VungleSDK::VungleAd^ sdk;
 		VungleSDK::AdConfig^ cfg;
 
 		void OnOnAdPlayableChanged(Platform::Object ^sender, VungleSDK::AdPlayableEventArgs ^args);

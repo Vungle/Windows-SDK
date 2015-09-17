@@ -19,13 +19,14 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::ApplicationModel::Core;
+using namespace VungleSDK;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 MainPage::MainPage()
 {
 	InitializeComponent();
-	cfg = ref new VungleSDK::AdConfig();
+	cfg = ref new AdConfig();
 }
 
 
@@ -40,7 +41,7 @@ void CPP_sample::MainPage::start_Tapped(Platform::Object^ sender, Windows::UI::X
 	if (sdk != nullptr)
 		return;
 	this->start->IsEnabled = false;
-	sdk = VungleSDK::vungleSDK::VungleSDK("vungleTest");
+	sdk = AdFactory::GetInstance("vungleTest");
 	sdk->OnAdPlayableChanged += ref new Windows::Foundation::EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample::MainPage::OnOnAdPlayableChanged);
 }
 

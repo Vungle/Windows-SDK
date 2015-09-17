@@ -23,7 +23,7 @@ namespace CS_sample
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        vungleSDK sdk;
+        VungleAd sdk;
         AdConfig cfg;
         public MainPage()
         {
@@ -45,7 +45,7 @@ namespace CS_sample
             if (sdk != null)
                 return;
             start.IsEnabled = false;
-            sdk = vungleSDK.VungleSDK("vungleTest");
+            sdk = AdFactory.GetInstance("vungleTest");
             sdk.OnAdPlayableChanged += Sdk_OnAdPlayableChanged;
         }
 
