@@ -2,6 +2,8 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using VungleSDK;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 
 
 namespace CS_sample
@@ -10,6 +12,7 @@ namespace CS_sample
     public sealed partial class MainPage : Page
     {
         VungleAd sdkInstance;
+        bool adPlayable;
 
         public MainPage()
         {
@@ -18,16 +21,18 @@ namespace CS_sample
             this.InitializeComponent();
         }
 
-        private void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e)
+        private async void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e)
         {
-            if (e.AdPlayable)
-            {
-                //ad became playable
-            }
-            else
-            {
-                //ad became not playable
-            }
+            adPlayable = e.AdPlayable;
+            await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                new DispatchedHandler(() => ChangeButtonsState()));
+        }
+
+        private void ChangeButtonsState()
+        {
+            DefaultConfigButton.IsEnabled = adPlayable;
+            IncentivizedConfigButton.IsEnabled = adPlayable;
+            MutedConfigButton.IsEnabled = adPlayable;
         }
 
         private async void DefaultConfigButton_Click(object sender, RoutedEventArgs e)
