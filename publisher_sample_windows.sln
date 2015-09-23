@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP_sample", "CPP_sample\CP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_sample", "CS_sample\CS_sample.csproj", "{7CE6CDD9-C5C7-4287-B6CB-5698D99B3F91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C SHARP Sample", "C SHARP Sample\C SHARP Sample.csproj", "{2F921853-2442-4EDA-A2A6-0BAD01A9C766}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -53,6 +55,24 @@ Global
 		{7CE6CDD9-C5C7-4287-B6CB-5698D99B3F91}.Release|x86.ActiveCfg = Release|x86
 		{7CE6CDD9-C5C7-4287-B6CB-5698D99B3F91}.Release|x86.Build.0 = Release|x86
 		{7CE6CDD9-C5C7-4287-B6CB-5698D99B3F91}.Release|x86.Deploy.0 = Release|x86
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|ARM.Build.0 = Debug|ARM
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|x64.ActiveCfg = Debug|x64
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|x64.Build.0 = Debug|x64
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|x64.Deploy.0 = Debug|x64
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|x86.ActiveCfg = Debug|x86
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|x86.Build.0 = Debug|x86
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Debug|x86.Deploy.0 = Debug|x86
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|ARM.ActiveCfg = Release|ARM
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|ARM.Build.0 = Release|ARM
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|ARM.Deploy.0 = Release|ARM
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|x64.ActiveCfg = Release|x64
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|x64.Build.0 = Release|x64
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|x64.Deploy.0 = Release|x64
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|x86.ActiveCfg = Release|x86
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|x86.Build.0 = Release|x86
+		{2F921853-2442-4EDA-A2A6-0BAD01A9C766}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
