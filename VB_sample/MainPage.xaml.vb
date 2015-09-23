@@ -1,15 +1,31 @@
 ﻿' The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 Imports VungleSDK
+Imports Windows.ApplicationModel.Core
+Imports Windows.UI.Core
 
 Public NotInheritable Class MainPage
     Inherits Page
 
-    Private sdkInstance As VungleAd
+    Private WithEvents sdkInstance As VungleAd
+    Private adPlayable As Boolean
 
     Public Sub New()
         InitializeComponent()
-        sdkInstance = AdFactory.GetInstance("pushokTest")
+        sdkInstance = AdFactory.GetInstance("vungleTest")
+    End Sub
+
+    Private Async Sub OnAdPlayable_EventHandler(sender As Object, args As AdPlayableEventArgs) Handles sdkInstance.OnAdPlayableChanged
+        adPlayable = args.AdPlayable
+        Await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                                           New DispatchedHandler(AddressOf ChangeButtonsState))
+
+    End Sub
+
+    Private Sub ChangeButtonsState()
+        DefaultConfigButton.IsEnabled = adPlayable
+        IncentivizedConfigButton.IsEnabled = adPlayable
+        MutedConfigButton.IsEnabled = adPlayable
     End Sub
 
     Private Async Sub DefaultConfigButton_Click(sender As Object, e As RoutedEventArgs)

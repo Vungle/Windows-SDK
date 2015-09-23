@@ -34,7 +34,8 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Margin="0,0,0,8"
-                Click="DefaultConfigButton_Click">
+                Click="DefaultConfigButton_Click"
+                IsEnabled="False">
                 <Button.Background>
                     <ImageBrush ImageSource="berlinSky.jpg"/>
                 </Button.Background>
@@ -47,7 +48,8 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Margin="0,0,0,8"
-                Click="IncentivizedConfigButton_Click">
+                Click="IncentivizedConfigButton_Click"
+                IsEnabled="False">
                 <Button.Background>
                     <ImageBrush ImageSource="londonSky.jpg"/>
                 </Button.Background>
@@ -60,7 +62,8 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Margin="0,0,0,8"
-                Click="MutedConfigButton_Click">
+                Click="MutedConfigButton_Click"
+                IsEnabled="False">
                 <Button.Background>
                     <ImageBrush ImageSource="sfSky.jpg"/>
                 </Button.Background>
