@@ -1,60 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using VungleSDK;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace CS_sample
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class MainPage : Page
     {
-        VungleAd sdk;
-        AdConfig cfg;
+        VungleAd sdkInstance;
+
         public MainPage()
         {
+            sdkInstance = AdFactory.GetInstance("pushokTest");
+            sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
             this.InitializeComponent();
-            cfg = new AdConfig();
-            
         }
 
-        private async void Sdk_OnAdPlayableChanged(object sender, AdPlayableEventArgs e)
+        private void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e)
         {
-            await Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            if (e.AdPlayable)
             {
-                play.IsEnabled = e.AdPlayable;
-            });
-        }
-
-        private void start_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (sdk != null)
-                return;
-            start.IsEnabled = false;
-            sdk = AdFactory.GetInstance("vungleTest");
-            sdk.OnAdPlayableChanged += Sdk_OnAdPlayableChanged;
-        }
-
-        private async void play_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (sdk.AdPlayable)
-            {
-                await sdk.PlayAdAsync(cfg);
+                //ad became playable
             }
+            else
+            {
+                //ad became not playable
+            }
+        }
+
+        private async void DefaultConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            await sdkInstance.PlayAdAsync(new AdConfig());
+        }
+
+        private async void IncentivizedConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            await sdkInstance.PlayAdAsync(new AdConfig { Incentivized = true });
+        }
+
+        private async void MutedConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            await sdkInstance.PlayAdAsync(new AdConfig { SoundEnabled = false });
         }
     }
 }
