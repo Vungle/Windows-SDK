@@ -26,31 +26,41 @@ using namespace VungleSDK;
 MainPage::MainPage()
 {
 	InitializeComponent();
-	cfg = ref new AdConfig();
+	sdkInstance = AdFactory::GetInstance("vungleTest");
+	sdkInstance->OnAdPlayableChanged += ref new Windows::Foundation::EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample::MainPage::OnOnAdPlayableChanged);
 }
-
-
-void CPP_sample::MainPage::play_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e)
-{
-	sdk->PlayAdAsync(cfg);
-}
-
-
-void CPP_sample::MainPage::start_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e)
-{
-	if (sdk != nullptr)
-		return;
-	this->start->IsEnabled = false;
-	sdk = AdFactory::GetInstance("vungleTest");
-	sdk->OnAdPlayableChanged += ref new Windows::Foundation::EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample::MainPage::OnOnAdPlayableChanged);
-}
-
 
 void CPP_sample::MainPage::OnOnAdPlayableChanged(Platform::Object ^sender, VungleSDK::AdPlayableEventArgs ^args)
 {
 	CoreApplication::MainView->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
 		ref new Windows::UI::Core::DispatchedHandler(
-			[this, args] {
-		this->play->IsEnabled = args->AdPlayable;
+			[this, args] 
+	{
+		bool adPlayable = args->AdPlayable;
+		this->DefaultConfigButton->IsEnabled = adPlayable;
+		this->IncentivizedConfigButton->IsEnabled = adPlayable;
+		this->MutedConfigButton->IsEnabled = adPlayable;
 	}));
+}
+
+
+void CPP_sample::MainPage::DefaultConfigButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	sdkInstance->PlayAdAsync(ref new AdConfig());
+}
+
+
+void CPP_sample::MainPage::IncentivizedConfigButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	AdConfig^ adConfig = ref new AdConfig();
+	adConfig->Incentivized = true;
+	sdkInstance->PlayAdAsync(adConfig);
+}
+
+
+void CPP_sample::MainPage::MutedConfigButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	AdConfig^ adConfig = ref new AdConfig();
+	adConfig->SoundEnabled = false;
+	sdkInstance->PlayAdAsync(adConfig);
 }

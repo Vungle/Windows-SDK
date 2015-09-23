@@ -11,6 +11,7 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class Grid;
                 ref class Button;
             }
         }
@@ -32,8 +33,10 @@ namespace CPP_sample
     private:
         bool _contentLoaded;
     
-        private: ::Windows::UI::Xaml::Controls::Button^ start;
-        private: ::Windows::UI::Xaml::Controls::Button^ play;
+        private: ::Windows::UI::Xaml::Controls::Grid^ ButtonsPanel;
+        private: ::Windows::UI::Xaml::Controls::Button^ DefaultConfigButton;
+        private: ::Windows::UI::Xaml::Controls::Button^ IncentivizedConfigButton;
+        private: ::Windows::UI::Xaml::Controls::Button^ MutedConfigButton;
     };
 }
 

@@ -29,16 +29,28 @@ void ::CPP_sample::MainPage::Connect(int __connectionId, ::Platform::Object^ __t
     {
         case 1:
             {
-                this->start = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->start))->Tapped += ref new ::Windows::UI::Xaml::Input::TappedEventHandler(this, (void (::CPP_sample::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Input::TappedRoutedEventArgs^))&MainPage::start_Tapped);
+                this->ButtonsPanel = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
             }
             break;
         case 2:
             {
-                this->play = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->play))->Tapped += ref new ::Windows::UI::Xaml::Input::TappedEventHandler(this, (void (::CPP_sample::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Input::TappedRoutedEventArgs^))&MainPage::play_Tapped);
+                this->DefaultConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->DefaultConfigButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::DefaultConfigButton_Click);
+            }
+            break;
+        case 3:
+            {
+                this->IncentivizedConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->IncentivizedConfigButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::IncentivizedConfigButton_Click);
+            }
+            break;
+        case 4:
+            {
+                this->MutedConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->MutedConfigButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::MutedConfigButton_Click);
             }
             break;
     }

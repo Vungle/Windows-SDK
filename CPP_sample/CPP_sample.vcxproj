@@ -167,6 +167,9 @@
     <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Image Include="Assets\StoreLogo.png" />
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Image Include="D:\home\job\berlinSky.jpg" />
+    <Image Include="D:\home\job\londonSky.jpg" />
+    <Image Include="D:\home\job\sfSky.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.xaml.cpp">
