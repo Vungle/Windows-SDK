@@ -44,13 +44,13 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="D:\home\job\berlinSky.jpg">
+    <Image Include="Assets\berlinSky.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="D:\home\job\londonSky.jpg">
+    <Image Include="Assets\londonSky.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="D:\home\job\sfSky.jpg">
+    <Image Include="Assets\sfSky.jpg">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

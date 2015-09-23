@@ -100,7 +100,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="sfSky.jpg" />
+    <Content Include="Assets\sfSky.jpg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -119,8 +119,8 @@
     <None Include="CS_sample_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="berlinSky.jpg" />
-    <Content Include="londonSky.jpg" />
+    <Content Include="Assets\berlinSky.jpg" />
+    <Content Include="Assets\londonSky.jpg" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
