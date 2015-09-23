@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="VB_sample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VB_sample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    MaxWidth="360">
+
+    <Grid 
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        Margin="12,8,12,8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Sample App" FontSize="45" Grid.Row="0"/>
+        <Grid 
+            x:Name="ButtonsPanel"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Button 
+                x:Name="DefaultConfigButton"
+                Content="Default Configuration"
+                Foreground="White"
+                Grid.Row="0"          
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="0,0,0,8"
+                Click="DefaultConfigButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="berlinSky.jpg"/>
+                </Button.Background>
+            </Button>
+            <Button 
+                x:Name="IncentivizedConfigButton"
+                Content="Incentivized"
+                Foreground="White"
+                Grid.Row="1"          
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="0,0,0,8"
+                Click="IncentivizedConfigButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="londonSky.jpg"/>
+                </Button.Background>
+            </Button>
+            <Button 
+                x:Name="MutedConfigButton"
+                Content="Muted"
+                Foreground="White"
+                Grid.Row="2"          
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="0,0,0,8"
+                Click="MutedConfigButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="sfSky.jpg"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </Grid>
+</Page>
