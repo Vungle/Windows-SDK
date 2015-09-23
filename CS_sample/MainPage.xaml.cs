@@ -16,7 +16,7 @@ namespace CS_sample
 
         public MainPage()
         {
-            sdkInstance = AdFactory.GetInstance("pushokTest");
+            sdkInstance = AdFactory.GetInstance("vungleTest");
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
             this.InitializeComponent();
         }
