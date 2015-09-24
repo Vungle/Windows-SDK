@@ -37,7 +37,7 @@
                 Click="DefaultConfigButton_Click"
                 IsEnabled="False">
                 <Button.Background>
-                    <ImageBrush ImageSource="berlinSky.jpg"/>
+                    <ImageBrush ImageSource="Assets/berlinSky.jpg"/>
                 </Button.Background>
             </Button>
             <Button 
@@ -51,7 +51,7 @@
                 Click="IncentivizedConfigButton_Click"
                 IsEnabled="False">
                 <Button.Background>
-                    <ImageBrush ImageSource="londonSky.jpg"/>
+                    <ImageBrush ImageSource="Assets/londonSky.jpg"/>
                 </Button.Background>
             </Button>
             <Button 
@@ -65,7 +65,7 @@
                 Click="MutedConfigButton_Click"
                 IsEnabled="False">
                 <Button.Background>
-                    <ImageBrush ImageSource="sfSky.jpg"/>
+                    <ImageBrush ImageSource="Assets/sfSky.jpg"/>
                 </Button.Background>
             </Button>
         </Grid>
