@@ -3,22 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP_sample", "CPP_sample\CPP_sample.vcxproj", "{69715D9B-44B5-4048-83AA-BC9919FA2444}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP_sample", "Windows Universal Samples\CPP_sample\CPP_sample.vcxproj", "{69715D9B-44B5-4048-83AA-BC9919FA2444}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_sample", "CS_sample\CS_sample.csproj", "{7CE6CDD9-C5C7-4287-B6CB-5698D99B3F91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_sample", "Windows Universal Samples\CS_sample\CS_sample.csproj", "{7CE6CDD9-C5C7-4287-B6CB-5698D99B3F91}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VB_sample", "VB_sample\VB_sample.vbproj", "{4E0A1EA3-2B36-424E-ABF0-15DD774332E9}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VB_sample", "Windows Universal Samples\VB_sample\VB_sample.vbproj", "{4E0A1EA3-2B36-424E-ABF0-15DD774332E9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX_XAML_sample", "DirectX_XAML_sample\DirectX_XAML_sample.vcxproj", "{9154EA33-632B-4C4E-BBE7-A40FF309D2BF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX_XAML_sample", "Windows Universal Samples\DirectX_XAML_sample\DirectX_XAML_sample.vcxproj", "{9154EA33-632B-4C4E-BBE7-A40FF309D2BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_sample_Windows8.1", "CS_sample_Windows8.1\CS_sample_Windows8.1.csproj", "{A6AB7948-81B2-47B4-9483-AF2274AEA669}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_sample_Windows8.1", "Windows 8.1 Samples\CS_sample_Windows8.1\CS_sample_Windows8.1.csproj", "{A6AB7948-81B2-47B4-9483-AF2274AEA669}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP_sample_Windows8.1", "CPP_sample_Windows8.1\CPP_sample_Windows8.1.vcxproj", "{11B8345B-7B04-4C23-A684-B0983880D4F5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP_sample_Windows8.1", "Windows 8.1 Samples\CPP_sample_Windows8.1\CPP_sample_Windows8.1.vcxproj", "{11B8345B-7B04-4C23-A684-B0983880D4F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_sample_WP8.1", "CS_sample_WP8.1\CS_sample_WP8.1.csproj", "{C789F706-0F09-4A44-8FE9-1440856C8F34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_sample_WP8.1", "Windows Phone 8.1 Samples\CS_sample_WP8.1\CS_sample_WP8.1.csproj", "{C789F706-0F09-4A44-8FE9-1440856C8F34}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP_sample_WP8.1", "CPP_sample_WP8.1\CPP_sample_WP8.1.vcxproj", "{41867626-77A4-46A2-A39C-66EDEC2253FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP_sample_WP8.1", "Windows Phone 8.1 Samples\CPP_sample_WP8.1\CPP_sample_WP8.1.vcxproj", "{41867626-77A4-46A2-A39C-66EDEC2253FA}"
 EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -198,5 +199,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69715D9B-44B5-4048-83AA-BC9919FA2444} = {87F0B322-BC51-4143-8CEC-17B3FB39DFAA}
+		{7CE6CDD9-C5C7-4287-B6CB-5698D99B3F91} = {87F0B322-BC51-4143-8CEC-17B3FB39DFAA}
+		{4E0A1EA3-2B36-424E-ABF0-15DD774332E9} = {87F0B322-BC51-4143-8CEC-17B3FB39DFAA}
+		{9154EA33-632B-4C4E-BBE7-A40FF309D2BF} = {87F0B322-BC51-4143-8CEC-17B3FB39DFAA}
+		{A6AB7948-81B2-47B4-9483-AF2274AEA669} = {0B3938E8-7B06-4519-96A7-6F680CCB7660}
+		{11B8345B-7B04-4C23-A684-B0983880D4F5} = {0B3938E8-7B06-4519-96A7-6F680CCB7660}
+		{C789F706-0F09-4A44-8FE9-1440856C8F34} = {ED5EB169-89E2-473B-9791-697966D0EF4C}
+		{41867626-77A4-46A2-A39C-66EDEC2253FA} = {ED5EB169-89E2-473B-9791-697966D0EF4C}
 	EndGlobalSection
 EndGlobal
