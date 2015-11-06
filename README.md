@@ -1,15 +1,28 @@
 # publisher-sample-windows
 
 ## Introduction
-These sample apps shows how to integrate the Vungle Windows SDK into an Windows Universal Application or Windows 8.1 Application. Each of the sample apps are written in the different languages but using the same SDK.
+These sample apps shows how to integrate the Vungle Windows SDK into an Windows Universal Application or Windows 8.1 Application or Windows Phone 8.1 Application. There are three groups of the samples:  
+
+1. Windows Universal Apps:
+  1. CS_sample
+  2. CPP_sample
+  3. DirectX_XAML_sample
+  4. VB_sample
+2. Windows 8.1 Apps:
+  1. CPP_sample_Windows8.1
+  2. CS_sample_Windows8.1
+3. Windows Phone 8.1 Apps:
+  1. CPP_sample_WP8.1
+  2. CS_sample_WP8.1  
+
+Each of the groups uses a special Vungle SDK adjusted for this type of the apps.
 
 ## Integration
-NOTE: This document contains examples written in C#. View code for more examples. There are six sample apps: C++ sample 
-app, C# sample app, Visual Basic sample app and DirectX+XAML sample app - this samples uses standart Vungle Windows SDK; C# Windows 8.1 sample app, C++ Windows 8.1 sample app - this samples uses the special SDK adjusted for Windows 8.1.
+NOTE: This document contains examples written in C#. View code for more examples.
 
 - In Visual Studio 2015 create new project using some template (depends on the type of your application and the language
 you want to use)
-- Download the Windows SDK
+- Download the Vungle Windows SDK
 - Add reference for the project to the Windows SDK file that has been downloaded
 - Import VungleSDK namespace. For example:
 ```c#
@@ -37,7 +50,7 @@ sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
 ```
 - Play the ad with the options you prefer. For example:
 ```c#
-private async void IncentivizedConfigButton_Click(object sender, RoutedEventArgs e)
+private async void CustomConfigButton_Click(object sender, RoutedEventArgs e)
 {
   await sdkInstance.PlayAdAsync(new AdConfig { Incentivized = true , SoundEnabled = false});
 }
