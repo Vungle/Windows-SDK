@@ -9,7 +9,7 @@ Once you've created an account you can follow our [Getting Started for Windows G
 * Windows 10.0 or later
 
 ## Release Notes
-### VERSION 1.1.1
+### VERSION 1.0.17
 * Initial release
 
 ### Integration
