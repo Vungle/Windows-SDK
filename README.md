@@ -9,6 +9,9 @@ Once you've created an account you can follow our [Getting Started for Windows G
 * Windows 10.0 or later
 
 ## Release Notes
+### VERSION 1.0.18
+* Removed assets from the manifest resources table for passing the WACK tests.
+
 ### VERSION 1.0.17
 * Initial release
 
