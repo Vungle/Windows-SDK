@@ -9,16 +9,15 @@ Once you've created an account you can follow our [Getting Started for Windows G
 * Visual Studio 2014, Windows 10.0 or later
 
 ## Release Notes
-<<<<<<< HEAD
+
 ### VERSION 1.1.6
 * Added support for Windows 8.1
-=======
+
 ### VERSION 1.0.18
 * Removed assets from the manifest resources table for passing the WACK tests.
 
 ### VERSION 1.0.17
 * Initial release
->>>>>>> master
 
 ### Integration
 NOTE: This document contains examples written in C#. View code for more examples. Sample apps shows how to integrate the Vungle Windows SDK into an Windows 10 Universal Application or Windows 8.1 Application or Windows Phone 8.1 Application. There are three groups of the samples:  
