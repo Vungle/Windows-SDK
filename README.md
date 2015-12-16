@@ -1,24 +1,19 @@
 # Vungle's Windows SDK
 
-<<<<<<< HEAD
 ## Getting Started
 To get up and running with Vungle, you'll need to [Create an Account With Vungle](https://v.vungle.com/dashboard) and [Add an Application to the Vungle Dashboard](https://support.vungle.com/hc/en-us/articles/210468678)
 
 Once you've created an account you can follow our [Getting Started for Windows Guide](https://support.vungle.com/hc/en-us/articles/211339368-Get-started-with-Vungle-Windows-SDK) to complete the integration. Remember to get the Vungle App ID from the Vungle dashboard.
 
 ### Requirements
-* Windows 10.0 or later
+* Visual Studio 2014, Windows 10.0 or later
 
 ## Release Notes
-### VERSION 1.0.17
-* Initial release
+### VERSION 1.1.6
+* Added support for Windows 8.1
 
 ### Integration
-NOTE: This document contains examples written in C#. View code for more examples. There are four sample apps: C++ sample
-app, C# sample app, Visual Basic sample app and DirectX+XAML sample app.
-=======
-## Introduction
-These sample apps shows how to integrate the Vungle Windows SDK into an Windows Universal Application or Windows 8.1 Application or Windows Phone 8.1 Application. There are three groups of the samples:  
+NOTE: This document contains examples written in C#. View code for more examples. Sample apps shows how to integrate the Vungle Windows SDK into an Windows 10 Universal Application or Windows 8.1 Application or Windows Phone 8.1 Application. There are three groups of the samples:  
 
 1. Windows Universal Apps:
   1. CS_sample
@@ -33,10 +28,6 @@ These sample apps shows how to integrate the Vungle Windows SDK into an Windows 
   2. CS_sample_WP8.1  
 
 Each of the groups uses a special Vungle SDK adjusted for this type of the apps.
-
-## Integration
-NOTE: This document contains examples written in C#. View code for more examples.
->>>>>>> wdk-163
 
 - In Visual Studio 2015 create new project using some template (depends on the type of your application and the language
 you want to use)
