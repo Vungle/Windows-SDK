@@ -56,7 +56,7 @@ sdkInstance = AdFactory.GetInstance("vungleTest");
 private async void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e)
 {
   //Run asynchronously on the UI thread
-  await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+  await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
   new DispatchedHandler(() => someMethod()));
 }
 ```

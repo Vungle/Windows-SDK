@@ -19,7 +19,7 @@ Public NotInheritable Class MainPage
     Private Async Sub OnAdPlayable_EventHandler(sender As Object, args As AdPlayableEventArgs) Handles sdkInstance.OnAdPlayableChanged
         adPlayable = args.AdPlayable
         'Run asynchronously on the UI thread'
-        Await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+        Await Me.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                                            New DispatchedHandler(AddressOf ChangeButtonsState))
 
     End Sub

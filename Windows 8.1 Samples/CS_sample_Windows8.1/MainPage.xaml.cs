@@ -30,7 +30,7 @@ namespace CS_sample_Windows8._1
         {
             adPlayable = e.AdPlayable;
             //Run asynchronously on the UI thread
-            await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 new DispatchedHandler(() => ChangeButtonsState()));
         }
 

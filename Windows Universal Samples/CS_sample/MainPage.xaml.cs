@@ -31,7 +31,7 @@ namespace CS_sample
         {
             adPlayable = e.AdPlayable;
             //Run asynchronously on the UI thread
-            await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 new DispatchedHandler(() => ChangeButtonsState()));
         }
 
