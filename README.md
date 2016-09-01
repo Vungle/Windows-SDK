@@ -6,9 +6,18 @@ To get up and running with Vungle, you'll need to [Create an Account With Vungle
 Once you've created an account you can follow our [Getting Started for Windows Guide](https://support.vungle.com/hc/en-us/articles/211339368-Get-started-with-Vungle-Windows-SDK) to complete the integration. Remember to get the Vungle App ID from the Vungle dashboard.
 
 ### Requirements
-* Visual Studio 2014, Windows 10.0 or later
+* Visual Studio 2015, Windows 10.0 or later
+#### Recommendations
+* The latest version of Windows 10 and Visual Studio 2015, cause Microsoft would fix bugs in their latest patch.
+
 
 ## Release Notes
+### VERSION 1.3.15
+*	Support Xbox controller in win 8.1 and win 10
+*	Support MRAID in Windows 10 Universal platform, Windows 8.1 Phone platform and Windows 8.1
+*	Add a warning for a wrong App ID 
+*	Fix crash issue when disk full
+*	Fix video view buttons layout in win8.1 phone
 
 ### VERSION 1.1.6
 * Added support for Windows 8.1
@@ -80,3 +89,5 @@ NOTE: Make sure that your project has "internetClient" capability in the package
     ...
 </Capabilities>
 ```
+## License
+The Vungle Windows-SDK is available under a commercial license. See the LICENSE.md file for more info.
