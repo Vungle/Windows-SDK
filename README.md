@@ -13,6 +13,11 @@ Once you've created an account you can follow our [Getting Started for Windows G
 
 ## Release Notes
 ### VERSION 1.3.15
+* Fix for ad serving issue on devices with certain language locale
+* Fix for stability issue when going from suspended and resume state
+* Minor fixes and performance improvements
+
+### VERSION 1.3.15
 *	Support Xbox controller in win 8.1 and win 10
 *	Support MRAID in Windows 10 Universal platform, Windows 8.1 Phone platform and Windows 8.1
 *	Add a warning for a wrong App ID 
