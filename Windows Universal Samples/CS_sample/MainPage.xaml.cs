@@ -23,10 +23,10 @@ namespace CS_sample
 
             // Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
-            sdkInstance.OnAdStart           += VungleAd_OnAdStart;
-            sdkInstance.OnVideoView         += VungleAd_OnVideoView;
-            sdkInstance.OnAdEnd             += VungleAd_OnAdEnd;
-            sdkInstance.Diagnostic          += VungleAd_Diagnostic;
+            sdkInstance.OnAdStart           += SdkInstance_OnAdStart;
+            sdkInstance.OnVideoView         += SdkInstance_OnVideoView;
+            sdkInstance.OnAdEnd             += SdkInstance_OnAdEnd;
+            sdkInstance.Diagnostic          += SdkInstance_Diagnostic;
         }
 
         // Event handler called when e.AdPlayable is changed
@@ -40,14 +40,14 @@ namespace CS_sample
                 new DispatchedHandler(() => ChangeButtonsState()));
         }
 
-        // Event Handler called before plahying an ad
-        private void VungleAd_OnAdStart(object sender, AdEventArgs e)
+        // Event Handler called before playing an ad
+        private void SdkInstance_OnAdStart(object sender, AdEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("OnAdStart(Id: " + e.Id + ")");
         }
 
         // Event handler called each time an ad completes
-        private void VungleAd_OnVideoView(object sender, AdViewEventArgs e)
+        private void SdkInstance_OnVideoView(object sender, AdViewEventArgs e)
         {
             // e.IsCompletedView is true when 80% of the video was watched
             // e.VideoDuration is actual time the user watched the video
@@ -59,7 +59,7 @@ namespace CS_sample
         }
 
         // Event handler called when the user leaves ad and control is return to the hosting app
-        private void VungleAd_OnAdEnd(object sender, AdEndEventArgs e)
+        private void SdkInstance_OnAdEnd(object sender, AdEndEventArgs e)
         {
             // e.CallToActionClicked is true when the user has clicked download button on end card
             System.Diagnostics.Debug.WriteLine("OnAdEnd(Id: " + e.Id + ")" + 
@@ -67,7 +67,7 @@ namespace CS_sample
         }
 
         // Event handler called when SDK wants to print diagnostic logs
-        private void VungleAd_Diagnostic(object sender, DiagnosticLogEvent e)
+        private void SdkInstance_Diagnostic(object sender, DiagnosticLogEvent e)
         {
             System.Diagnostics.Debug.WriteLine(e.Level + " " + e.Type + " " + e.Exception + " " + e.Message);
         }
