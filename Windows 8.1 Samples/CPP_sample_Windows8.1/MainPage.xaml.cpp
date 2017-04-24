@@ -20,7 +20,7 @@ MainPage::MainPage()
 	InitializeComponent();
 
 	//Obtain Vungle SDK instance
-	sdkInstance = AdFactory::GetInstance("57ae1919198401ab3100004a");
+	sdkInstance = AdFactory::GetInstance("Test_Windows");
 
 	//Register OnAdPlayableChanged event handler
 	sdkInstance->OnAdPlayableChanged += ref new EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample_Windows8_1::MainPage::OnOnAdPlayableChanged);

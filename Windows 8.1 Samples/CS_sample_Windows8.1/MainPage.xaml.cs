@@ -18,7 +18,7 @@ namespace CS_sample_Windows8._1
             InitializeComponent();
 
             // Obtain Vungle SDK instance
-            sdkInstance = AdFactory.GetInstance("57ae1919198401ab3100004a");
+            sdkInstance = AdFactory.GetInstance("Test_Windows");
 
             // Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;

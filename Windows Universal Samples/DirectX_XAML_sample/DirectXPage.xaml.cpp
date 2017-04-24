@@ -34,7 +34,7 @@ DirectXPage::DirectXPage():
 	InitializeComponent();
 
 	//Obtain Vungle SDK instance
-	sdkInstance = AdFactory::GetInstance("vungleTest");
+	sdkInstance = AdFactory::GetInstance("Test_Windows");
 
 	//Register OnAdPlayableChanged event handler
 	sdkInstance->OnAdPlayableChanged += ref new Windows::Foundation::
