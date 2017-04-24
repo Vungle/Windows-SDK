@@ -8,17 +8,10 @@
 
 using namespace CPP_sample;
 
-using namespace Platform;
 using namespace Windows::Foundation;
-using namespace Windows::Foundation::Collections;
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Controls::Primitives;
-using namespace Windows::UI::Xaml::Data;
-using namespace Windows::UI::Xaml::Input;
-using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::ApplicationModel::Core;
+
 //Using VungleSDK namespace
 using namespace VungleSDK;
 
@@ -28,10 +21,14 @@ MainPage::MainPage()
 	InitializeComponent();
 
 	//Obtain Vungle SDK instance
-	sdkInstance = AdFactory::GetInstance("vungleTest");
+	sdkInstance = AdFactory::GetInstance("Test_Windows");
 
-	//Register OnAdPlayableChanged event handler
-	sdkInstance->OnAdPlayableChanged += ref new Windows::Foundation::EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample::MainPage::OnOnAdPlayableChanged);
+	//Register event handlers
+	sdkInstance->OnAdPlayableChanged += ref new EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample::MainPage::OnOnAdPlayableChanged);
+	sdkInstance->OnAdStart			 += ref new EventHandler<VungleSDK::AdEventArgs ^>(this, &CPP_sample::MainPage::OnAdStart);
+	sdkInstance->OnVideoView		 += ref new EventHandler<VungleSDK::AdViewEventArgs ^>(this, &CPP_sample::MainPage::OnVideoView);
+	sdkInstance->OnAdEnd			 += ref new EventHandler<VungleSDK::AdEndEventArgs ^>(this, &CPP_sample::MainPage::OnAdEnd);
+	sdkInstance->Diagnostic			 += ref new EventHandler<VungleSDK::DiagnosticLogEvent ^>(this, &CPP_sample::MainPage::Diagnostic);
 }
 
 //Event handler for OnAdPlayableChanged event
@@ -50,6 +47,11 @@ void CPP_sample::MainPage::OnOnAdPlayableChanged(Platform::Object ^sender, Vungl
 	}));
 }
 
+//Event handlers
+void CPP_sample::MainPage::OnAdStart(Platform::Object^ sender, VungleSDK::AdEventArgs^ e) { }
+void CPP_sample::MainPage::OnVideoView(Platform::Object^ sender, VungleSDK::AdViewEventArgs^ e) { }
+void CPP_sample::MainPage::OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e) { }
+void CPP_sample::MainPage::Diagnostic(Platform::Object^ sender, VungleSDK::DiagnosticLogEvent^ e) { }
 
 void CPP_sample::MainPage::DefaultConfigButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {

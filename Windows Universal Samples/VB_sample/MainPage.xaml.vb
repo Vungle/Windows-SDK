@@ -12,7 +12,7 @@ Public NotInheritable Class MainPage
     Public Sub New()
         InitializeComponent()
         'Obtain Vungle SDK instance'
-        sdkInstance = AdFactory.GetInstance("vungleTest")
+        sdkInstance = AdFactory.GetInstance("Test_Windows")
     End Sub
 
     'Register OnAdPlayableChanged event handler'
