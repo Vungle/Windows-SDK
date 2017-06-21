@@ -19,7 +19,7 @@ namespace CS_sample
             InitializeComponent();
 
             // Obtain Vungle SDK instance
-            sdkInstance = AdFactory.GetInstance("Test_Windows");
+            sdkInstance = AdFactory.GetInstance("591236625b2480ac40000028", new string[] { "DEFAULT18080" });
 
             // Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
@@ -93,7 +93,6 @@ namespace CS_sample
             // Default values are assigned for illustrative purpose for Body, CloseButton, ContinueButton 
             await sdkInstance.PlayAdAsync(new AdConfig
             {
-                Incentivized = true,
                 UserId = "VungleTestUser",                          // Default: null
                 IncentivizedDialogTitle = "Close Incentivized Ad",  // Default: null
                 IncentivizedDialogBody = "Are you sure you want to skip this ad? If you do, you might not get your reward",

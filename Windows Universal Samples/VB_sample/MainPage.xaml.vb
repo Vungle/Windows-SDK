@@ -12,7 +12,9 @@ Public NotInheritable Class MainPage
     Public Sub New()
         InitializeComponent()
         'Obtain Vungle SDK instance'
-        sdkInstance = AdFactory.GetInstance("Test_Windows")
+        Dim placements(0) As String
+        placements(0) = "DEFAULT18080"
+        sdkInstance = AdFactory.GetInstance("591236625b2480ac40000028", placements)
     End Sub
 
     'Register OnAdPlayableChanged event handler'
@@ -40,7 +42,6 @@ Public NotInheritable Class MainPage
     Private Async Sub IncentivizedConfigButton_Click(sender As Object, e As RoutedEventArgs)
         'Play ad with enabled 'incentivized' option'
         Dim adConfig As New AdConfig
-        adConfig.Incentivized = True
         Await sdkInstance.PlayAdAsync(adConfig)
     End Sub
 

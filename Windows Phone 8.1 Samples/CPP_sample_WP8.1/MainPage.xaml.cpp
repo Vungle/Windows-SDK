@@ -21,7 +21,8 @@ MainPage::MainPage()
 	InitializeComponent();
 
 	//Obtain Vungle SDK instance
-	sdkInstance = AdFactory::GetInstance("Test_Windows");
+	Platform::String ^str = "DEFAULT18080";
+	sdkInstance = AdFactory::GetInstance("591236625b2480ac40000028", ref new Platform::Array<Platform::String^>(&str, 1));
 
 	//Register OnAdPlayableChanged event handler
 	sdkInstance->OnAdPlayableChanged += ref new EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample_WP8_1::MainPage::OnOnAdPlayableChanged);
@@ -67,7 +68,6 @@ void CPP_sample_WP8_1::MainPage::IncentivizedConfigButton_Click(Platform::Object
 {
 	//Play ad with enabled 'incentivized' option
 	AdConfig^ adConfig = ref new AdConfig();
-	adConfig->Incentivized = true;
 	sdkInstance->PlayAdAsync(adConfig);
 }
 
