@@ -13,61 +13,189 @@
         Margin="12,8,12,8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Sample App" FontSize="45" Grid.Row="0"/>
+        <TextBlock x:Name="appIDTextBlock" 
+            HorizontalAlignment="Center"
+            Grid.Row="1"
+            TextWrapping="Wrap" 
+            Text="AppID:" 
+            VerticalAlignment="Top"
+            Margin="0,15,0,0"
+            FontWeight="Bold" Foreground="Black"/>
+        <Button 
+            x:Name="InitSDK"
+            Content="Init SDK"
+            Foreground="White"
+            FontWeight="Bold"
+            Grid.Row="1"          
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0,20,0,0"
+            Click="InitSDK_Click"
+            IsEnabled="True"
+            Width="200"
+            Background="#FF00B079" RenderTransformOrigin="1,0"/>
         <Grid 
             x:Name="ButtonsPanel"
-            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-            Grid.Row="1">
+            Background="#FF10253A"
+            Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+            <Grid 
+                Background="#FFe5254f"
+                Width="75"
+                Height="16"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Row="0">
+                <TextBlock x:Name="cachedTextBlock" 
+                       HorizontalAlignment="Left"
+                       Grid.Row="1"
+                       TextWrapping="Wrap" 
+                       Text="AUTO CACHE" 
+                       VerticalAlignment="Top" 
+                       Margin="5,0,0,0"
+                       FontWeight="Bold"
+                       FontSize="10"
+                       Foreground="White" />
+            </Grid>
+            <TextBlock x:Name="placement1TextBlock" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="0"
+                       TextWrapping="Wrap" 
+                       Text="Placement1" 
+                       VerticalAlignment="Center" 
+                       Margin="0,-65,0,0"
+                       FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="placement1IDTextBlock" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="0"
+                       Margin="0,-25,0,0"
+                       TextWrapping="Wrap" 
+                       Text="PlacementID:" 
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       FontWeight="Bold" Foreground="White"/>
             <Button 
-                x:Name="DefaultConfigButton"
-                Content="Default Configuration"
+                x:Name="PlayPlacement1"
+                Content="Play"
                 Foreground="White"
                 Grid.Row="0"          
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Margin="0,0,0,8"
-                Click="DefaultConfigButton_Click"
-                IsEnabled="False">
-                <Button.Background>
-                    <ImageBrush ImageSource="Assets/berlinSky.jpg"/>
-                </Button.Background>
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0,45,0,0"
+                Click="PlayPlacement1_Click"
+                IsEnabled="False"
+                Background="#FF204C6D"
+                FontWeight="Bold"
+                Width="100">
             </Button>
+            <Grid 
+                Background="#FFcbd0d3"
+                Height="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Grid.Row="1"/>
+            <TextBlock x:Name="placement2TextBlock" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="1"
+                       TextWrapping="Wrap" 
+                       Text="Placement2" 
+                       VerticalAlignment="Center" 
+                       Margin="0,-65,0,0"
+                       FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="placement2IDTextBlock" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Grid.Row="1"
+                       Margin="0,-25,0,0"
+                       TextWrapping="Wrap" 
+                       Text="PlacementID:" 
+                       FontSize="12"
+                       FontWeight="Bold" Foreground="White"/>
             <Button 
-                x:Name="IncentivizedConfigButton"
-                Content="Incentivized"
+                x:Name="PlayPlacement2"
+                Content="Play"
                 Foreground="White"
                 Grid.Row="1"          
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Margin="0,0,0,8"
-                Click="IncentivizedConfigButton_Click"
-                IsEnabled="False">
-                <Button.Background>
-                    <ImageBrush ImageSource="Assets/londonSky.jpg"/>
-                </Button.Background>
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="140,45,0,0"
+                Click="PlayPlacement2_Click"
+                IsEnabled="False"
+                Background="#FF204C6D"
+                FontWeight="Bold"
+                Width="100">
             </Button>
             <Button 
-                x:Name="MutedConfigButton"
-                Content="Muted"
+                x:Name="LoadPlacement2"
+                Content="Load"
+                Foreground="White"
+                Grid.Row="1"          
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="-120,45,0,0"
+                Click="LoadPlacement2_Click"
+                IsEnabled="False"
+                Background="#FF204C6D"
+                FontWeight="Bold"
+                Width="100">
+            </Button>
+            <Grid 
+                Background="#FFcbd0d3"
+                Height="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Grid.Row="2"/>
+            <TextBlock x:Name="placement3TextBlock" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="2"
+                       TextWrapping="Wrap" 
+                       Text="Placement3" 
+                       VerticalAlignment="Center" 
+                       Margin="0,-65,0,0"
+                       FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="placement3IDTextBlock" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="2"
+                       Margin="0,-25,0,0"
+                       TextWrapping="Wrap" 
+                       Text="PlacementID:" 
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       FontWeight="Bold" Foreground="White"/>
+            <Button 
+                x:Name="PlayPlacement3"
+                Content="Play"
                 Foreground="White"
                 Grid.Row="2"          
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Margin="0,0,0,8"
-                Click="MutedConfigButton_Click"
-                IsEnabled="False">
-                <Button.Background>
-                    <ImageBrush ImageSource="Assets/sfSky.jpg"/>
-                </Button.Background>
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="140,45,0,0"
+                Click="PlayPlacement3_Click"
+                IsEnabled="False"
+                Background="#FF204C6D"
+                FontWeight="Bold"
+                Width="100">
             </Button>
+            <Button 
+                x:Name="LoadPlacement3"
+                Content="Load"
+                Foreground="White"
+                Grid.Row="2"          
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="-120,45,0,0"
+                Click="LoadPlacement3_Click"
+                IsEnabled="False"
+                FontWeight="Bold"
+                Width="100" Background="#FF204C6D"/>
         </Grid>
     </Grid>
 </Page>

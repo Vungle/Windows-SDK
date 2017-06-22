@@ -22,14 +22,36 @@ void ::CPP_sample_WP8_1::MainPage::InitializeComponent()
     // Call LoadComponent on ms-appx:///MainPage.xaml
     ::Windows::UI::Xaml::Application::LoadComponent(this, ref new ::Windows::Foundation::Uri(L"ms-appx:///MainPage.xaml"), ::Windows::UI::Xaml::Controls::Primitives::ComponentResourceLocation::Application);
 
+    // Get the TextBlock named 'appIDTextBlock'
+    appIDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"appIDTextBlock"));
+    // Get the Button named 'InitSDK'
+    InitSDK = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"InitSDK"));
     // Get the Grid named 'ButtonsPanel'
     ButtonsPanel = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ButtonsPanel"));
-    // Get the Button named 'DefaultConfigButton'
-    DefaultConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"DefaultConfigButton"));
-    // Get the Button named 'IncentivizedConfigButton'
-    IncentivizedConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"IncentivizedConfigButton"));
-    // Get the Button named 'MutedConfigButton'
-    MutedConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"MutedConfigButton"));
+    // Get the TextBlock named 'placement1TextBlock'
+    placement1TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"placement1TextBlock"));
+    // Get the TextBlock named 'placement1IDTextBlock'
+    placement1IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"placement1IDTextBlock"));
+    // Get the Button named 'PlayPlacement1'
+    PlayPlacement1 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"PlayPlacement1"));
+    // Get the TextBlock named 'placement2TextBlock'
+    placement2TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"placement2TextBlock"));
+    // Get the TextBlock named 'placement2IDTextBlock'
+    placement2IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"placement2IDTextBlock"));
+    // Get the Button named 'PlayPlacement2'
+    PlayPlacement2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"PlayPlacement2"));
+    // Get the Button named 'LoadPlacement2'
+    LoadPlacement2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"LoadPlacement2"));
+    // Get the TextBlock named 'placement3TextBlock'
+    placement3TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"placement3TextBlock"));
+    // Get the TextBlock named 'placement3IDTextBlock'
+    placement3IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"placement3IDTextBlock"));
+    // Get the Button named 'PlayPlacement3'
+    PlayPlacement3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"PlayPlacement3"));
+    // Get the Button named 'LoadPlacement3'
+    LoadPlacement3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"LoadPlacement3"));
+    // Get the TextBlock named 'cachedTextBlock'
+    cachedTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"cachedTextBlock"));
 }
 
 void ::CPP_sample_WP8_1::MainPage::Connect(int connectionId, Platform::Object^ target)
@@ -38,15 +60,27 @@ void ::CPP_sample_WP8_1::MainPage::Connect(int connectionId, Platform::Object^ t
     {
     case 1:
         (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
-            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::DefaultConfigButton_Click);
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::InitSDK_Click);
         break;
     case 2:
         (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
-            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::IncentivizedConfigButton_Click);
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::PlayPlacement1_Click);
         break;
     case 3:
         (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
-            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::MutedConfigButton_Click);
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::PlayPlacement2_Click);
+        break;
+    case 4:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::LoadPlacement2_Click);
+        break;
+    case 5:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::PlayPlacement3_Click);
+        break;
+    case 6:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample_WP8_1::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::LoadPlacement3_Click);
         break;
     }
     (void)connectionId; // Unused parameter

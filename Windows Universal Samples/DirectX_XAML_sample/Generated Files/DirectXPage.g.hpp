@@ -34,39 +34,100 @@ void ::DirectX_XAML_sample::DirectXPage::Connect(int __connectionId, ::Platform:
             break;
         case 2:
             {
-                this->buttonsPanel = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                this->appIDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 3:
             {
-                this->DefaultConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->DefaultConfigButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::DefaultConfigButton_Click);
+                this->InitSDK = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->InitSDK))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::InitSDK_Click);
             }
             break;
         case 4:
             {
-                this->IncentivizedConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->IncentivizedConfigButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::IncentivizedConfigButton_Click);
+                this->ButtonsPanel = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
             }
             break;
         case 5:
             {
-                this->MutedConfigButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->MutedConfigButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::MutedConfigButton_Click);
+                this->placement1TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 6:
             {
-                this->bottomAppBar = safe_cast<::Windows::UI::Xaml::Controls::AppBar^>(__target);
+                this->placement1IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 7:
             {
-                ::Windows::UI::Xaml::Controls::AppBarButton^ element7 = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(element7))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
+                this->PlayPlacement1 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->PlayPlacement1))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::PlayPlacement1_Click);
+            }
+            break;
+        case 8:
+            {
+                this->placement2TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 9:
+            {
+                this->placement2IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 10:
+            {
+                this->PlayPlacement2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->PlayPlacement2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::PlayPlacement2_Click);
+            }
+            break;
+        case 11:
+            {
+                this->LoadPlacement2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->LoadPlacement2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::LoadPlacement2_Click);
+            }
+            break;
+        case 12:
+            {
+                this->placement3TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 13:
+            {
+                this->placement3IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 14:
+            {
+                this->PlayPlacement3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->PlayPlacement3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::PlayPlacement3_Click);
+            }
+            break;
+        case 15:
+            {
+                this->LoadPlacement3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->LoadPlacement3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::LoadPlacement3_Click);
+            }
+            break;
+        case 16:
+            {
+                this->cachedTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 17:
+            {
+                this->bottomAppBar = safe_cast<::Windows::UI::Xaml::Controls::AppBar^>(__target);
+            }
+            break;
+        case 18:
+            {
+                ::Windows::UI::Xaml::Controls::AppBarButton^ element18 = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(element18))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::DirectX_XAML_sample::DirectXPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::AppBarButton_Click);
             }
             break;

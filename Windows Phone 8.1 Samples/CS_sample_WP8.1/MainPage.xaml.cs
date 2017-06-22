@@ -11,32 +11,32 @@ namespace CS_sample_WP8._1
     public sealed partial class MainPage : Page
     {
         VungleAd sdkInstance;
-        bool adPlayable;
+
+        private string appID = "591236625b2480ac40000028";
+        private string placement1 = "DEFAULT18080";
+        private string placement2 = "PLMT02I58745";
+        private string placement3 = "PLMT03R02739";
 
         public MainPage()
         {
             InitializeComponent();
 
-            // Obtain Vungle SDK instance
-            sdkInstance = AdFactory.GetInstance("591236625b2480ac40000028", new string[] { "DEFAULT18080" });
+            appIDTextBlock.Text = "AppID: " + appID;
+            placement1IDTextBlock.Text = "PlacementID: " + placement1;
+            placement2IDTextBlock.Text = "PlacementID: " + placement2;
+            placement3IDTextBlock.Text = "PlacementID: " + placement3;
+        }
 
-            // Register event handlers
-            sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
-            sdkInstance.OnAdStart += SdkInstance_OnAdStart;
-            sdkInstance.OnVideoView += SdkInstance_OnVideoView;
-            sdkInstance.OnAdEnd += SdkInstance_OnAdEnd;
-            sdkInstance.Diagnostic += SdkInstance_Diagnostic;
+        //Event handler for OnInitComleted event
+        private async void SdkInstance_OnInitCompleted(object sender, ConfigEventArgs e)
+        {
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() => ChangeLoadButtonsState(e.Initialized)));
         }
 
         // Event handler called when e.AdPlayable is changed
         private async void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e)
         {
-            // e.AdPlayble is true when SDK has an ad ready to be played
-            // e.AdPlayble is false when there is no ad available to play 
-            adPlayable = e.AdPlayable;
-            // Run asynchronously on the UI thread
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                new DispatchedHandler(() => ChangeButtonsState()));
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() => ChangePlayButtonState(e.AdPlayable, e.Placement)));
         }
 
         // Event Handler called before playing an ad
@@ -71,39 +71,72 @@ namespace CS_sample_WP8._1
             System.Diagnostics.Debug.WriteLine(e.Level + " " + e.Type + " " + e.Exception + " " + e.Message);
         }
 
-        private void ChangeButtonsState()
+        private void InitSDK_Click(Object sender, RoutedEventArgs e)
         {
-            // Change IsEnabled property for each button
-            DefaultConfigButton.IsEnabled = adPlayable;
-            IncentivizedConfigButton.IsEnabled = adPlayable;
-            MutedConfigButton.IsEnabled = adPlayable;
+            //Obtain Vungle SDK instance
+            sdkInstance = AdFactory.GetInstance(appID, new string[] { placement1, placement2, placement3 });
+
+            //Register event handlers
+            sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
+            sdkInstance.OnAdStart += SdkInstance_OnAdStart;
+            sdkInstance.OnVideoView += SdkInstance_OnVideoView;
+            sdkInstance.OnAdEnd += SdkInstance_OnAdEnd;
+            sdkInstance.Diagnostic += SdkInstance_Diagnostic;
+            sdkInstance.OnInitCompleted += SdkInstance_OnInitCompleted;
+
+            InitSDK.IsEnabled = false;
         }
 
-        private async void DefaultConfigButton_Click(object sender, RoutedEventArgs e)
+        private void LoadPlacement2_Click(Object sender, RoutedEventArgs e)
         {
-            // Play ad with default configuration
-            await sdkInstance.PlayAdAsync(new AdConfig());
+            //Load ad for placement2
+            sdkInstance.LoadAd(placement2);
         }
 
-        private async void IncentivizedConfigButton_Click(object sender, RoutedEventArgs e)
+        private void LoadPlacement3_Click(Object sender, RoutedEventArgs e)
         {
-            // Play ad with enabled 'incentivized' option
-            // IncentivizedDialog objects are used only when incentivied is set to true
-            // Default values are assigned for illustrative purpose for Body, CloseButton, ContinueButton 
-            await sdkInstance.PlayAdAsync(new AdConfig
+            //Load ad for placement3
+            sdkInstance.LoadAd(placement3);
+        }
+
+        private async void PlayPlacement1_Click(Object sender, RoutedEventArgs e)
+        {
+            //Play ad for placement1
+            await sdkInstance.PlayAdAsync(new AdConfig(), placement1);
+        }
+
+        private async void PlayPlacement2_Click(Object sender, RoutedEventArgs e)
+        {
+            //Play ad for placement2
+            await sdkInstance.PlayAdAsync(new AdConfig(), placement2);
+        }
+
+        private async void PlayPlacement3_Click(Object sender, RoutedEventArgs e)
+        {
+            //Play ad for placement3
+            await sdkInstance.PlayAdAsync(new AdConfig(), placement3);
+        }
+
+        private void ChangeLoadButtonsState(bool isInitialized)
+        {
+            LoadPlacement2.IsEnabled = isInitialized;
+            LoadPlacement3.IsEnabled = isInitialized;
+        }
+
+        private void ChangePlayButtonState(bool adPlayable, string placement)
+        {
+            if (placement.Equals(placement1))
             {
-                UserId = "VungleTestUser",                          // Default: null
-                IncentivizedDialogTitle = "Close Incentivized Ad",  // Default: null
-                IncentivizedDialogBody = "Are you sure you want to skip this ad? If you do, you might not get your reward",
-                IncentivizedDialogCloseButton = "Close",
-                IncentivizedDialogContinueButton = "Continue Watching"
-            });
-        }
-
-        private async void MutedConfigButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Play ad with sound muted
-            await sdkInstance.PlayAdAsync(new AdConfig { SoundEnabled = false });
+                PlayPlacement1.IsEnabled = adPlayable;
+            }
+            else if (placement.Equals(placement2))
+            {
+                PlayPlacement2.IsEnabled = adPlayable;
+            }
+            else if (placement.Equals(placement3))
+            {
+                PlayPlacement3.IsEnabled = adPlayable;
+            }
         }
     }
 }
