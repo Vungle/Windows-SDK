@@ -8,10 +8,10 @@ Public NotInheritable Class MainPage
 
     Private WithEvents sdkInstance As VungleAd
 
-    Private appID As String = "591236625b2480ac40000028"
-    Private placement1 As String = "DEFAULT18080"
-    Private placement2 As String = "PLMT02I58745"
-    Private placement3 As String = "PLMT03R02739"
+    Private appID As String = "59594347474e66d51b00000e"
+    Private placement1 As String = "DEFAULT24224"
+    Private placement2 As String = "INT01T194026"
+    Private placement3 As String = "REW20V379403"
 
     Public Sub New()
         InitializeComponent()

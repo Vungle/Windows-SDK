@@ -183,7 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="VungleSDK">
-      <HintPath>..\..\VungleSDK_win8.1\VungleSDK.winmd</HintPath>
+      <HintPath>..\..\..\..\windows-sdk-dev\VungleSDK\VungleSDK.win81\bin\Release\VungleSDK.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
   </ItemGroup>

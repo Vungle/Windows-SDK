@@ -13,10 +13,10 @@ namespace CS_sample
     {
         VungleAd sdkInstance;
 
-        private string appID = "591236625b2480ac40000028";
-        private string placement1 = "DEFAULT18080";
-        private string placement2 = "PLMT02I58745";
-        private string placement3 = "PLMT03R02739";
+        private string appID = "59594347474e66d51b00000e";
+        private string placement1 = "DEFAULT24224";
+        private string placement2 = "INT01T194026";
+        private string placement3 = "REW20V379403";
 
         public MainPage()
         {
