@@ -1,5 +1,8 @@
 ## Changelog
 
+### VERSION 2.0.8
+* Launched new Placements feature
+
 ### VERSION 1.3.16
 * Fix for ad serving issue on devices with certain language locale
 * Fix for stability issue when going from suspended and resume state
