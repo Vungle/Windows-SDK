@@ -18,10 +18,10 @@ namespace CPP_sample
 		MainPage();
 
 	private:
-		std::string appID = "59594347474e66d51b00000e";
-		std::string placement1 = "DEFAULT24224";
-		std::string placement2 = "INT01T194026";
-		std::string placement3 = "REW20V379403";
+		std::string appID = "59792a4f057243276200298a";
+		std::string placement1 = "DEFAULT18154";
+		std::string placement2 = "PLACEME92007";
+		std::string placement3 = "REWARDP93292";
 
 		VungleSDK::VungleAd^ sdkInstance;
 

@@ -5,6 +5,8 @@
 
 #include "pch.h"
 #include "DirectXPage.xaml.h"
+#include "sstream"
+#include "iostream"
 
 using namespace DirectX_XAML_sample;
 
@@ -27,10 +29,10 @@ using namespace Windows::ApplicationModel::Core;
 //Using VungleSDK namespace
 using namespace VungleSDK;
 
-std::string appID = "59594347474e66d51b00000e";
-std::string placement1 = "DEFAULT24224";
-std::string placement2 = "INT01T194026";
-std::string placement3 = "REW20V379403";
+std::string appID = "59792a4f057243276200298a";
+std::string placement1 = "DEFAULT18154";
+std::string placement2 = "PLACEME92007";
+std::string placement3 = "REWARDP93292";
 
 DirectXPage::DirectXPage():
 	m_windowVisible(true),
@@ -133,13 +135,25 @@ void DirectX_XAML_sample::DirectXPage::PlayPlacement1_Click(Platform::Object^ se
 void DirectX_XAML_sample::DirectXPage::PlayPlacement2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//Play ad for placement2
-	sdkInstance->PlayAdAsync(ref new AdConfig, ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
+	AdConfig ^adConfig = ref new AdConfig;
+	adConfig->Orientation = VungleSDK::DisplayOrientations(0);  //DisplayOrientations.Portrait;
+	adConfig->SoundEnabled = false; // Default: true
+
+	sdkInstance->PlayAdAsync(adConfig, ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
 }
 
 void DirectX_XAML_sample::DirectXPage::PlayPlacement3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//Play ad for placement3
-	sdkInstance->PlayAdAsync(ref new AdConfig, ref new Platform::String(std::wstring(placement3.begin(), placement3.end()).c_str()));
+	AdConfig ^adConfig = ref new AdConfig;
+
+	adConfig->IncentivizedDialogBody = "Are you sure you want to skip this ad? You must finish watching to claim your reward.";
+	adConfig->IncentivizedDialogCloseButton = "Close";
+	adConfig->IncentivizedDialogContinueButton = "Continue";
+	adConfig->IncentivizedDialogTitle = "Close this ad?";
+	adConfig->UserId = "VungleTest";
+
+	sdkInstance->PlayAdAsync(adConfig, ref new Platform::String(std::wstring(placement3.begin(), placement3.end()).c_str()));
 }
 
 //Event handler for OnInitComleted event
@@ -150,6 +164,41 @@ void DirectX_XAML_sample::DirectXPage::OnInitCompleted(Platform::Object ^sender,
 		ref new Windows::UI::Core::DispatchedHandler(
 			[this, args]
 	{
+		size_t converted;
+		std::stringstream placementsInfo;
+		placementsInfo << std::endl << "OnInitCompleted: ";
+		const wchar_t* wcInitialized = args->Initialized.ToString()->Data();
+		char cInitialized[512];
+		wcstombs_s(&converted, cInitialized, 512, wcInitialized, 512);
+		placementsInfo << cInitialized;
+
+		if (args->Initialized == true)
+		{
+			for (int i = 0; i < args->Placements->Length; i++)
+			{
+				placementsInfo << "\n\tPlacement" << (i + 1) << ": ";
+				const wchar_t* wcPlacement = args->Placements[i]->ReferenceId->Data();
+				char cPlacement[512];
+				wcstombs_s(&converted, cPlacement, 512, wcPlacement, 512);
+				placementsInfo << cPlacement;
+
+				if (args->Placements[i]->IsAutoCached == true) {
+					placementsInfo << " (Auto-Cached)";
+				}
+			}
+		}
+		else
+		{
+			placementsInfo << "\n\t";
+			const wchar_t* wcEmessage = args->ErrorMessage->Data();
+			char cEmessage[512];
+			wcstombs_s(&converted, cEmessage, 512, wcEmessage, 512);
+			placementsInfo << cEmessage;
+		}
+		placementsInfo << std::endl;
+
+		OutputDebugStringA(placementsInfo.str().c_str());
+
 		//Change IsEnabled property for each button
 		bool isInitialized = args->Initialized;
 		this->LoadPlacement2->IsEnabled = isInitialized;
@@ -157,7 +206,7 @@ void DirectX_XAML_sample::DirectXPage::OnInitCompleted(Platform::Object ^sender,
 	}));
 }
 
-//Event handler for OnAdPlayableChanged event 
+// Event handler called when e->AdPlayable is changed
 void DirectX_XAML_sample::DirectXPage::OnOnAdPlayableChanged(Platform::Object ^sender, VungleSDK::AdPlayableEventArgs ^args)
 {
 	//Run asynchronously on the UI thread
@@ -181,6 +230,11 @@ void DirectX_XAML_sample::DirectXPage::OnOnAdPlayableChanged(Platform::Object ^s
 		else if (placement.compare(placement3) == 0) {
 			this->PlayPlacement3->IsEnabled = adPlayable;
 		}
+
+		std::stringstream dmess;
+		dmess << std::endl << "OnAdPlayable: " << placement << " - " << adPlayable << std::endl;
+
+		OutputDebugStringA(dmess.str().c_str());
 	}));
 }
 

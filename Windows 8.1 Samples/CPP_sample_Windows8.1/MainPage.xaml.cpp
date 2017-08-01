@@ -5,6 +5,8 @@
 
 #include "pch.h"
 #include "MainPage.xaml.h"
+#include "sstream"
+#include "iostream"
 
 using namespace CPP_sample_Windows8_1;
 
@@ -15,10 +17,10 @@ using namespace Windows::ApplicationModel::Core;
 //Using VungleSDK namespace
 using namespace VungleSDK;
 
-std::string appID = "59594347474e66d51b00000e";
-std::string placement1 = "DEFAULT24224";
-std::string placement2 = "INT01T194026";
-std::string placement3 = "REW20V379403";
+std::string appID = "59792a4f057243276200298a";
+std::string placement1 = "DEFAULT18154";
+std::string placement2 = "PLACEME92007";
+std::string placement3 = "REWARDP93292";
 
 MainPage::MainPage()
 {
@@ -43,6 +45,41 @@ void CPP_sample_Windows8_1::MainPage::OnInitCompleted(Platform::Object ^sender, 
 		ref new Windows::UI::Core::DispatchedHandler(
 			[this, args]
 	{
+		size_t converted;
+		std::stringstream placementsInfo;
+		placementsInfo << std::endl << "OnInitCompleted: ";
+		const wchar_t* wcInitialized = args->Initialized.ToString()->Data();
+		char cInitialized[512];
+		wcstombs_s(&converted, cInitialized, 512, wcInitialized, 512);
+		placementsInfo << cInitialized;
+
+		if (args->Initialized == true)
+		{
+			for (int i = 0; i < args->Placements->Length; i++)
+			{
+				placementsInfo << "\n\tPlacement" << (i + 1) << ": ";
+				const wchar_t* wcPlacement = args->Placements[i]->ReferenceId->Data();
+				char cPlacement[512];
+				wcstombs_s(&converted, cPlacement, 512, wcPlacement, 512);
+				placementsInfo << cPlacement;
+
+				if (args->Placements[i]->IsAutoCached == true) {
+					placementsInfo << " (Auto-Cached)";
+				}
+			}
+		}
+		else
+		{
+			placementsInfo << "\n\t";
+			const wchar_t* wcEmessage = args->ErrorMessage->Data();
+			char cEmessage[512];
+			wcstombs_s(&converted, cEmessage, 512, wcEmessage, 512);
+			placementsInfo << cEmessage;
+		}
+		placementsInfo << std::endl;
+
+		OutputDebugStringA(placementsInfo.str().c_str());
+
 		//Change IsEnabled property for each button
 		bool isInitialized = args->Initialized;
 		this->LoadPlacement2->IsEnabled = isInitialized;
@@ -74,14 +111,86 @@ void CPP_sample_Windows8_1::MainPage::OnOnAdPlayableChanged(Platform::Object ^se
 		else if (placement.compare(placement3) == 0) {
 			this->PlayPlacement3->IsEnabled = adPlayable;
 		}
+
+		std::stringstream dmess;
+		dmess << std::endl << "OnAdPlayable: " << placement << " - " << adPlayable << std::endl;
+
+		OutputDebugStringA(dmess.str().c_str());
 	}));
 }
 
-//Event handlers
-void CPP_sample_Windows8_1::MainPage::OnAdStart(Platform::Object^ sender, VungleSDK::AdEventArgs^ e) { }
+// Event Handler called before playing an ad
+void CPP_sample_Windows8_1::MainPage::OnAdStart(Platform::Object^ sender, VungleSDK::AdEventArgs^ e) 
+{
+	// e.Id        - Vungle app ID in string
+	// e.Placement - placement ID in string
+	std::stringstream dmess;
+	size_t converted;
+	const wchar_t* wcId = e->Id->Data();
+	char cId[512];
+	wcstombs_s(&converted, cId, 512, wcId, 512);
+	const wchar_t* wcPlacement = e->Placement->Data();
+	char cPlacement[512];
+	wcstombs_s(&converted, cPlacement, 512, wcPlacement, 512);
+
+	dmess << std::endl << "OnAdStart(" << cId << "): " << cPlacement << std::endl;
+
+	OutputDebugStringA(dmess.str().c_str());
+}
+
+// DEPRECATED - use SdkInstance_OnAdEnd() instead
 void CPP_sample_Windows8_1::MainPage::OnVideoView(Platform::Object^ sender, VungleSDK::AdViewEventArgs^ e) { }
-void CPP_sample_Windows8_1::MainPage::OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e) { }
-void CPP_sample_Windows8_1::MainPage::Diagnostic(Platform::Object^ sender, VungleSDK::DiagnosticLogEvent^ e) { }
+
+// Event handler called when the user leaves ad and control is return to the hosting app
+void CPP_sample_Windows8_1::MainPage::OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e) 
+{
+	// e->Id                  - Vungle app ID in string
+	// e->Placement           - placement ID in string
+	// e->IsCompletedView     - true when 80% or more of the video was watched
+	// e->CallToActionClicked - true when the user has clicked download button on end card
+	// e->WatchedDuration     - duration of video watched
+	// e->VideoDuration       - DEPRECATED
+	std::stringstream dmess;
+	size_t converted;
+	const wchar_t* wcId = e->Id->Data();
+	char cId[512];
+	wcstombs_s(&converted, cId, 512, wcId, 512);
+
+	const wchar_t* wcPlacement = e->Placement->Data();
+	char cPlacement[512];
+	wcstombs_s(&converted, cPlacement, 512, wcPlacement, 512);
+
+	dmess << std::endl << "OnVideoEnd(" << cId << "): " << "\n\tPlacement: " << cPlacement << "\n\tIsCompletedView: " << e->IsCompletedView;
+	dmess << "\n\tCallToActionClicked: " << e->CallToActionClicked << "\n\tWatchedDuration: " << e->WatchedDuration.Duration << std::endl;
+
+	OutputDebugStringA(dmess.str().c_str());
+}
+
+// Event handler called when SDK wants to print diagnostic logs
+void CPP_sample_Windows8_1::MainPage::Diagnostic(Platform::Object^ sender, VungleSDK::DiagnosticLogEvent^ e) 
+{
+	std::stringstream dmess;
+	size_t converted;
+	const wchar_t* wcLevel = e->Level.ToString()->Data();
+	char cLevel[512];
+	wcstombs_s(&converted, cLevel, 512, wcLevel, 512);
+
+	const wchar_t* wcType = e->Type.Name->Data();
+	char cType[512];
+	wcstombs_s(&converted, cType, 512, wcType, 512);
+
+	const wchar_t* wcException = e->Exception.ToString()->Data();
+	char cException[512];
+	wcstombs_s(&converted, cException, 512, wcException, 512);
+
+	const wchar_t* wcMessage = e->Message->Data();
+	char cMessage[512];
+	wcstombs_s(&converted, cMessage, 512, wcMessage, 512);
+
+	dmess << std::endl << "Diagnostics: " << cLevel << " " << cType << " " << cException << " " << cMessage;
+
+	OutputDebugStringA(dmess.str().c_str());
+}
 
 
 void CPP_sample_Windows8_1::MainPage::InitSDK_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -96,7 +205,6 @@ void CPP_sample_Windows8_1::MainPage::InitSDK_Click(Platform::Object^ sender, Wi
 	//Register event handlers
 	sdkInstance->OnAdPlayableChanged += ref new EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample_Windows8_1::MainPage::OnOnAdPlayableChanged);
 	sdkInstance->OnAdStart += ref new EventHandler<VungleSDK::AdEventArgs ^>(this, &CPP_sample_Windows8_1::MainPage::OnAdStart);
-	sdkInstance->OnVideoView += ref new EventHandler<VungleSDK::AdViewEventArgs ^>(this, &CPP_sample_Windows8_1::MainPage::OnVideoView);
 	sdkInstance->OnAdEnd += ref new EventHandler<VungleSDK::AdEndEventArgs ^>(this, &CPP_sample_Windows8_1::MainPage::OnAdEnd);
 	sdkInstance->Diagnostic += ref new EventHandler<VungleSDK::DiagnosticLogEvent ^>(this, &CPP_sample_Windows8_1::MainPage::Diagnostic);
 	sdkInstance->OnInitCompleted += ref new EventHandler<VungleSDK::ConfigEventArgs ^>(this, &CPP_sample_Windows8_1::MainPage::OnInitCompleted);
@@ -125,11 +233,23 @@ void CPP_sample_Windows8_1::MainPage::PlayPlacement1_Click(Platform::Object^ sen
 void CPP_sample_Windows8_1::MainPage::PlayPlacement2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//Play ad for placement2
-	sdkInstance->PlayAdAsync(ref new AdConfig, ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
+	AdConfig ^adConfig = ref new AdConfig;
+	adConfig->Orientation = DisplayOrientations(0);  //DisplayOrientations.Portrait;
+	adConfig->SoundEnabled = false; // Default: true
+
+	sdkInstance->PlayAdAsync(adConfig, ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
 }
 
 void CPP_sample_Windows8_1::MainPage::PlayPlacement3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//Play ad for placement3
-	sdkInstance->PlayAdAsync(ref new AdConfig, ref new Platform::String(std::wstring(placement3.begin(), placement3.end()).c_str()));
+	AdConfig ^adConfig = ref new AdConfig;
+
+	adConfig->IncentivizedDialogBody = "Are you sure you want to skip this ad? You must finish watching to claim your reward.";
+	adConfig->IncentivizedDialogCloseButton = "Close";
+	adConfig->IncentivizedDialogContinueButton = "Continue";
+	adConfig->IncentivizedDialogTitle = "Close this ad?";
+	adConfig->UserId = "VungleTest";
+
+	sdkInstance->PlayAdAsync(adConfig, ref new Platform::String(std::wstring(placement3.begin(), placement3.end()).c_str()));
 }
