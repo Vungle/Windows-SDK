@@ -144,7 +144,6 @@ namespace CS_sample
         {
             //Play ad for placement2
             embeddedControl.AppID = appID;
-            embeddedControl.ApiEndpoint = "https://ads.api.vungle.com";
             embeddedControl.Placements = placement1 + "," + placement2 + "," + placement3;
             embeddedControl.Placement = placement2;
             embeddedControl.SoundEnabled = false;
