@@ -18,8 +18,6 @@ namespace CS_sample
         private string placement2 = "PLACEME92007";
         private string placement3 = "REWARDP93292";
 
-        Action<Action> doInMainthread;
-
         public MainPage()
         {
             InitializeComponent();
@@ -28,13 +26,6 @@ namespace CS_sample
             placement1IDTextBlock.Text = "PlacementID: " + placement1;
             placement2IDTextBlock.Text = "PlacementID: " + placement2;
             placement3IDTextBlock.Text = "PlacementID: " + placement3;
-
-            doInMainthread = action => {
-                var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                {
-                    action();
-                });
-            };
         }
 
         //Event handler for OnInitComleted event
