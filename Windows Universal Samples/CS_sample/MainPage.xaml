@@ -1,9 +1,11 @@
 ﻿<Page
+    
     x:Class="CS_sample.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CS_sample"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:UI="using:VungleSDK.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     MinWidth="360"
@@ -97,6 +99,7 @@
                 FontWeight="Bold"
                 Width="100">
             </Button>
+            <UI:VungleAdControl x:Name="embeddedControl" Height="1" Width="300"/>
             <Grid 
                 Background="#FFcbd0d3"
                 Height="1"
