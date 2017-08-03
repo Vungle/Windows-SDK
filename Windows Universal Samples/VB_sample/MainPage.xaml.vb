@@ -30,7 +30,6 @@ Public NotInheritable Class MainPage
         placementsInfo = "OnInitCompleted: " + args.Initialized.ToString()
         If (args.Initialized = True) Then
             For i As Integer = 0 To (args.Placements.Length - 1)
-                Dim refId As String
                 placementsInfo += "\n\tPlacement" + (i + 1).ToString() + ": " + args.Placements(i).ReferenceId
 
                 If args.Placements(i).IsAutoCached = True Then
@@ -60,6 +59,21 @@ Public NotInheritable Class MainPage
                                                            New DispatchedHandler(Sub() ChangePlayButtonState(args.AdPlayable, args.Placement)))
 
     End Sub
+
+    '// Event Handler called before playing an ad'
+    Private Async Sub Embedded_OnAdStart(sender As Object, e As AdEventArgs) Handles embeddedControl.OnAdStart
+        Await Me.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, New DispatchedHandler(Sub() ChangeEmbeddedHeight(250)))
+    End Sub
+
+    '// Event handler called when the user leaves ad And control Is return to the hosting app'
+    Private Async Sub Embedded_OnAdEnd(sender As Object, e As AdEndEventArgs) Handles embeddedControl.OnAdEnd
+        Await Me.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, New DispatchedHandler(Sub() ChangeEmbeddedHeight(1)))
+    End Sub
+
+    Private Sub ChangeEmbeddedHeight(value As Double)
+        embeddedControl.Height = value
+    End Sub
+
 
     Private Sub ChangeLoadButtonsState(initialized As Boolean)
         LoadPlacement2.IsEnabled = initialized
@@ -110,11 +124,12 @@ Public NotInheritable Class MainPage
 
     Private Async Sub PlayPlacement2_Click(sender As Object, e As RoutedEventArgs)
         'Play ad for placement2'
-        Dim adConfig As New AdConfig
-        adConfig.Orientation = DisplayOrientations.Portrait
-        adConfig.SoundEnabled = False ' Default: true'
+        embeddedControl.AppID = appID
+        embeddedControl.Placements = placement1 + "," + placement2 + "," + placement3
+        embeddedControl.Placement = placement2
+        embeddedControl.SoundEnabled = False
 
-        Await sdkInstance.PlayAdAsync(adConfig, placement2)
+        Await embeddedControl.PlayAdAsync()
     End Sub
 
     Private Async Sub PlayPlacement3_Click(sender As Object, e As RoutedEventArgs)

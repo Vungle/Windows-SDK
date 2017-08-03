@@ -132,7 +132,7 @@
                 VerticalAlignment="Center"
                 Margin="140,45,0,0"
                 Click="PlayPlacement2_Click"
-                IsEnabled="False"
+                IsEnabled="True"
                 Background="#FF204C6D"
                 FontWeight="Bold"
                 Width="100">

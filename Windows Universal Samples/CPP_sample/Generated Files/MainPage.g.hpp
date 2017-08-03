@@ -63,53 +63,58 @@ void ::CPP_sample::MainPage::Connect(int __connectionId, ::Platform::Object^ __t
             break;
         case 7:
             {
-                this->placement2TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->embeddedControl = safe_cast<::VungleSDK::UI::VungleAdControl^>(__target);
             }
             break;
         case 8:
             {
-                this->placement2IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->placement2TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 9:
+            {
+                this->placement2IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 10:
             {
                 this->PlayPlacement2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->PlayPlacement2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::PlayPlacement2_Click);
             }
             break;
-        case 10:
+        case 11:
             {
                 this->LoadPlacement2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->LoadPlacement2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::LoadPlacement2_Click);
             }
             break;
-        case 11:
+        case 12:
             {
                 this->placement3TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
-        case 12:
+        case 13:
             {
                 this->placement3IDTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
-        case 13:
+        case 14:
             {
                 this->PlayPlacement3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->PlayPlacement3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::PlayPlacement3_Click);
             }
             break;
-        case 14:
+        case 15:
             {
                 this->LoadPlacement3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->LoadPlacement3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CPP_sample::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::LoadPlacement3_Click);
             }
             break;
-        case 15:
+        case 16:
             {
                 this->cachedTextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }

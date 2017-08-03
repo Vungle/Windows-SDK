@@ -63,6 +63,11 @@ namespace DirectX_XAML_sample
 		void PlayPlacement3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void OnInitCompleted(Platform::Object ^sender, VungleSDK::ConfigEventArgs ^args);
 		void OnOnAdPlayableChanged(Platform::Object ^sender, VungleSDK::AdPlayableEventArgs ^args);
+
+		void Embedded_OnAdStart(Platform::Object^ sender, VungleSDK::AdEventArgs^ e);
+		void Embedded_OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e);
+		void ChangeEmbeddedHeight(double value);
+
 		VungleSDK::VungleAd^ sdkInstance;
 	};
 }

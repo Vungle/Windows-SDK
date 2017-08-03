@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CPP_sample_WP8_1"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:UI="using:VungleSDK.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
@@ -95,6 +96,7 @@
                 FontWeight="Bold"
                 Width="100">
             </Button>
+            <UI:VungleAdControl x:Name="embeddedControl" Height="1" Width="300"/>
             <Grid 
                 Background="#FFcbd0d3"
                 Height="1"

@@ -135,11 +135,15 @@ void DirectX_XAML_sample::DirectXPage::PlayPlacement1_Click(Platform::Object^ se
 void DirectX_XAML_sample::DirectXPage::PlayPlacement2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//Play ad for placement2
-	AdConfig ^adConfig = ref new AdConfig;
-	adConfig->Orientation = VungleSDK::DisplayOrientations(0);  //DisplayOrientations.Portrait;
-	adConfig->SoundEnabled = false; // Default: true
+	embeddedControl->AppID = ref new Platform::String(std::wstring(appID.begin(), appID.end()).c_str());
+	std::string str = placement1 + "," + placement2 + "," + placement3;
+	embeddedControl->Placements = ref new Platform::String(std::wstring(str.begin(), str.end()).c_str());
+	embeddedControl->Placement = ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str());
+	embeddedControl->SoundEnabled = false;
 
-	sdkInstance->PlayAdAsync(adConfig, ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
+	embeddedControl->OnAdStart += ref new EventHandler<VungleSDK::AdEventArgs ^>(this, &DirectXPage::Embedded_OnAdStart);
+	embeddedControl->OnAdEnd += ref new EventHandler<VungleSDK::AdEndEventArgs ^>(this, &DirectXPage::Embedded_OnAdEnd);
+	embeddedControl->PlayAdAsync();
 }
 
 void DirectX_XAML_sample::DirectXPage::PlayPlacement3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -328,5 +332,32 @@ void DirectXPage::OnSwapChainPanelSizeChanged(Object^ sender, SizeChangedEventAr
 	critical_section::scoped_lock lock(m_main->GetCriticalSection());
 	m_deviceResources->SetLogicalSize(e->NewSize);
 	m_main->CreateWindowSizeDependentResources();
+}
+
+// Event Handler called before playing an ad
+void DirectXPage::Embedded_OnAdStart(Platform::Object^ sender, VungleSDK::AdEventArgs^ e)
+{
+	CoreApplication::MainView->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
+		ref new Windows::UI::Core::DispatchedHandler(
+			[this, e]
+	{
+		ChangeEmbeddedHeight(250);
+	}));
+}
+
+// Event handler called when the user leaves ad and control is return to the hosting app
+void DirectXPage::Embedded_OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e)
+{
+	CoreApplication::MainView->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
+		ref new Windows::UI::Core::DispatchedHandler(
+			[this, e]
+	{
+		ChangeEmbeddedHeight(1);
+	}));
+}
+
+void DirectXPage::ChangeEmbeddedHeight(double value)
+{
+	embeddedControl->Height = value;
 }
 

@@ -27,6 +27,10 @@ namespace CPP_sample_Windows8_1
 		void OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e);
 		void Diagnostic(Platform::Object^ sender, VungleSDK::DiagnosticLogEvent^ e);
 
+		void Embedded_OnAdStart(Platform::Object^ sender, VungleSDK::AdEventArgs^ e);
+		void Embedded_OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e);
+		void AnimateHeight(double value);
+
 		void InitSDK_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e);
 		void LoadPlacement2_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e);
 		void LoadPlacement3_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e);

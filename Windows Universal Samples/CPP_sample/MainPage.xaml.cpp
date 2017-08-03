@@ -231,11 +231,15 @@ void CPP_sample::MainPage::PlayPlacement1_Click(Platform::Object^ sender, Window
 void CPP_sample::MainPage::PlayPlacement2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//Play ad for placement2
-	AdConfig ^adConfig = ref new AdConfig;
-	adConfig->Orientation = DisplayOrientations(0);  //DisplayOrientations.Portrait;
-	adConfig->SoundEnabled = false; // Default: true
+	embeddedControl->AppID = ref new Platform::String(std::wstring(appID.begin(), appID.end()).c_str());
+	std::string str = placement1 + "," + placement2 + "," + placement3;
+	embeddedControl->Placements = ref new Platform::String(std::wstring(str.begin(), str.end()).c_str());
+	embeddedControl->Placement = ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str());
+	embeddedControl->SoundEnabled = false;
 
-	sdkInstance->PlayAdAsync(adConfig, ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
+	embeddedControl->OnAdStart += ref new EventHandler<VungleSDK::AdEventArgs ^>(this, &CPP_sample::MainPage::Embedded_OnAdStart);
+	embeddedControl->OnAdEnd += ref new EventHandler<VungleSDK::AdEndEventArgs ^>(this, &CPP_sample::MainPage::Embedded_OnAdEnd);
+	embeddedControl->PlayAdAsync();
 }
 
 void CPP_sample::MainPage::PlayPlacement3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -250,4 +254,48 @@ void CPP_sample::MainPage::PlayPlacement3_Click(Platform::Object^ sender, Window
 	adConfig->UserId = "VungleTest";
 
 	sdkInstance->PlayAdAsync(adConfig, ref new Platform::String(std::wstring(placement3.begin(), placement3.end()).c_str()));
+}
+
+// Event Handler called before playing an ad
+void CPP_sample::MainPage::Embedded_OnAdStart(Platform::Object^ sender, VungleSDK::AdEventArgs^ e)
+{
+	CoreApplication::MainView->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
+		ref new Windows::UI::Core::DispatchedHandler(
+			[this, e]
+	{
+		AnimateHeight(250);
+	}));
+}
+
+// Event handler called when the user leaves ad and control is return to the hosting app
+void CPP_sample::MainPage::Embedded_OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEventArgs^ e)
+{
+	CoreApplication::MainView->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
+		ref new Windows::UI::Core::DispatchedHandler(
+			[this, e]
+	{
+		AnimateHeight(1);
+	}));
+}
+
+void CPP_sample::MainPage::AnimateHeight(double value)
+{
+	auto anim = ref new Windows::UI::Xaml::Media::Animation::DoubleAnimation();
+	anim->From = embeddedControl->Height;
+	anim->To = value;
+	anim->EnableDependentAnimation = true;
+	auto beginTime = Windows::Foundation::TimeSpan();
+	beginTime.Duration = 0;
+	auto duration = Windows::Foundation::TimeSpan();
+	duration.Duration = 500 * 1000;
+	anim->BeginTime = beginTime;
+	anim->Duration = duration;
+
+	
+	Windows::UI::Xaml::Media::Animation::Storyboard::SetTarget(anim, embeddedControl);
+	Windows::UI::Xaml::Media::Animation::Storyboard::SetTargetProperty(anim, "Height");
+	Windows::UI::Xaml::Media::Animation::Storyboard::AllowDependentAnimations = true;
+	auto storyboard = ref new Windows::UI::Xaml::Media::Animation::Storyboard();
+	storyboard->Children->Append(anim);
+	storyboard->Begin();
 }

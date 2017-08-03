@@ -65,11 +65,6 @@ namespace CS_sample_Windows8._1
         {
             // e.Id        - Vungle app ID in string
             // e.Placement - placement ID in string
-            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                if (e.Placement.Equals(placement2))
-                    AnimateHeight(200);
-            });
 
             System.Diagnostics.Debug.WriteLine("OnAdStart(" + e.Id + "): " + e.Placement);
         }
@@ -86,11 +81,6 @@ namespace CS_sample_Windows8._1
             // e.CallToActionClicked - true when the user has clicked download button on end card
             // e.WatchedDuration     - duration of video watched
             // e.VideoDuration       - DEPRECATED
-            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                if (e.Placement.Equals(placement2))
-                    AnimateHeight(1);
-            });
 
             System.Diagnostics.Debug.WriteLine("OnVideoEnd(" + e.Id + "): " +
                "\n\tPlacement: " + e.Placement +
@@ -146,6 +136,9 @@ namespace CS_sample_Windows8._1
             embeddedControl.Placement = placement2;
             embeddedControl.SoundEnabled = false;
 
+            embeddedControl.OnAdStart += Embedded_OnAdStart;
+            embeddedControl.OnAdEnd += Embedded_OnAdEnd;
+
             var nEmb = await embeddedControl.PlayAdAsync();
         }
 
@@ -199,6 +192,24 @@ namespace CS_sample_Windows8._1
             var sb = new Storyboard();
             sb.Children.Add(anim);
             sb.Begin();
+        }
+
+        // Event Handler called before playing an ad
+        private void Embedded_OnAdStart(object sender, AdEventArgs e)
+        {
+            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                AnimateHeight(200);
+            });
+        }
+
+        // Event handler called when the user leaves ad and control is return to the hosting app
+        private void Embedded_OnAdEnd(object sender, AdEndEventArgs e)
+        {
+            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                AnimateHeight(1);
+            });
         }
     }
 }
