@@ -10,6 +10,10 @@ Once you've created an account you can follow our [Getting Started for Windows G
 #### Recommendations
 * The latest version of Windows 10 and Visual Studio 2015, because Microsoft would fix bugs in their latest patch.
 
+## Release Notes
+### VERSION 5.1.0
+* Fix for ad that could be only less than half seen in app window
+* Minor fixes
 
 ## Release Notes
 ### VERSION 2.0.8
