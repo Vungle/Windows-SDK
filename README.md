@@ -12,8 +12,7 @@ Once you've created an account you can follow our [Getting Started for Windows G
 
 ## Release Notes
 ### VERSION 5.1.0
-* Fix for ad that could be only less than half seen in app window
-* Minor fixes
+* Launched Native (embedded) ads feature and VungleAdControl XAML control
 
 ## Release Notes
 ### VERSION 2.0.8
