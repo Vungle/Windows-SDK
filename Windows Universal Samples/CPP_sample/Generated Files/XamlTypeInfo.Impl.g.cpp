@@ -11,6 +11,55 @@
 #include "XamlTypeInfo.g.h"
 
 
+// XamlMetaDataProvider
+namespace CPP_sample
+{
+    namespace CPP_sample_XamlTypeInfo
+    {
+        [Windows::Foundation::Metadata::WebHostHidden]
+        public ref class XamlMetaDataProvider sealed : public ::Windows::UI::Xaml::Markup::IXamlMetadataProvider
+        {
+        public:
+            [::Windows::Foundation::Metadata::DefaultOverload]
+            virtual ::Windows::UI::Xaml::Markup::IXamlType^ GetXamlType(::Windows::UI::Xaml::Interop::TypeName type);
+            virtual ::Windows::UI::Xaml::Markup::IXamlType^ GetXamlType(::Platform::String^ fullName);
+            virtual ::Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>^ GetXmlnsDefinitions();
+            
+        private:
+            ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ _provider;
+            property ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ Provider
+            {
+                ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ get();
+            }
+        };
+    }
+    
+}
+
+[::Windows::Foundation::Metadata::DefaultOverload]
+::Windows::UI::Xaml::Markup::IXamlType^ ::CPP_sample::CPP_sample_XamlTypeInfo::XamlMetaDataProvider::GetXamlType(::Windows::UI::Xaml::Interop::TypeName type)
+{
+    return Provider->GetXamlTypeByType(type);
+}
+
+::Windows::UI::Xaml::Markup::IXamlType^ ::CPP_sample::CPP_sample_XamlTypeInfo::XamlMetaDataProvider::GetXamlType(Platform::String^ fullName)
+{
+    return Provider->GetXamlTypeByName(fullName);
+}
+
+Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>^ ::CPP_sample::CPP_sample_XamlTypeInfo::XamlMetaDataProvider::GetXmlnsDefinitions()
+{
+    return ref new Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>(0);
+}
+
+::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ ::CPP_sample::CPP_sample_XamlTypeInfo::XamlMetaDataProvider::Provider::get()
+{
+    if (_provider == nullptr)
+    {
+        _provider = ref new XamlTypeInfo::InfoProvider::XamlTypeInfoProvider();
+    }
+    return _provider;
+}
 
 // XamlTypeInfoProvider
 ::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::GetXamlTypeByType(::Windows::UI::Xaml::Interop::TypeName type)
@@ -95,6 +144,41 @@
 }
 
 
+::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::CheckOtherMetadataProvidersForName(::Platform::String^ typeName)
+{
+    ::Windows::UI::Xaml::Markup::IXamlType^ foundXamlType = nullptr;
+    for (unsigned int i = 0; i < OtherProviders->Size; i++)
+    {
+        auto xamlType = OtherProviders->GetAt(i)->GetXamlType(typeName);
+        if(xamlType != nullptr)
+        {
+            if(xamlType->IsConstructible)    // not Constructible means it might be a Return Type Stub
+            {
+                return xamlType;
+            }
+            foundXamlType = xamlType;
+        }
+    }
+    return foundXamlType;
+}
+
+::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::CheckOtherMetadataProvidersForType(::Windows::UI::Xaml::Interop::TypeName t)
+{
+    ::Windows::UI::Xaml::Markup::IXamlType^ foundXamlType = nullptr;
+    for (unsigned int i = 0; i < OtherProviders->Size; i++)
+    {
+        auto xamlType = OtherProviders->GetAt(i)->GetXamlType(t);
+        if(xamlType != nullptr)
+        {
+            if(xamlType->IsConstructible)    // not Constructible means it might be a Return Type Stub
+            {
+                return xamlType;
+            }
+            foundXamlType = xamlType;
+        }
+    }
+    return foundXamlType;
+}
 
 // XamlSystemBaseType
 ::XamlTypeInfo::InfoProvider::XamlSystemBaseType::XamlSystemBaseType(::Platform::String^ name) :
@@ -270,6 +354,10 @@ bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsArray::get()
 {
     return _isArray;
 }
+void ::XamlTypeInfo::InfoProvider::XamlUserType::IsArray::set(bool value)
+{
+    _isArray = value;
+}
 
 bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsCollection::get()
 {
@@ -291,9 +379,19 @@ bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsMarkupExtension::get()
     return _isMarkupExtension;
 }
 
+void ::XamlTypeInfo::InfoProvider::XamlUserType::IsMarkupExtension::set(bool value)
+{
+    _isMarkupExtension = value;
+}
+
 bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsEnum::get()
 {
     return _isEnum;
+}
+
+void ::XamlTypeInfo::InfoProvider::XamlUserType::IsEnum::set(bool value)
+{
+    _isEnum = value;
 }
 
 bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsBindable::get()
@@ -301,9 +399,19 @@ bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsBindable::get()
     return _isBindable;
 }
 
+void ::XamlTypeInfo::InfoProvider::XamlUserType::IsBindable::set(bool value)
+{
+    _isBindable = value;
+}
+
 bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsReturnTypeStub::get()
 {
     return _isReturnTypeStub;
+}
+
+void ::XamlTypeInfo::InfoProvider::XamlUserType::IsReturnTypeStub::set(bool value)
+{
+    _isReturnTypeStub = value;
 }
 
 bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsLocalType::get()
@@ -311,9 +419,19 @@ bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsLocalType::get()
     return _isLocalType;
 }
 
+void ::XamlTypeInfo::InfoProvider::XamlUserType::IsLocalType::set(bool value)
+{
+    _isLocalType = value;
+}
+
 ::Windows::UI::Xaml::Markup::IXamlMember^ ::XamlTypeInfo::InfoProvider::XamlUserType::ContentProperty::get()
 {
     return _provider->GetMemberByLongName(_contentPropertyName);
+}
+
+void ::XamlTypeInfo::InfoProvider::XamlUserType::ContentPropertyName::set(::Platform::String^ value)
+{
+    _contentPropertyName = value;
 }
 
 ::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlUserType::ItemType::get()
@@ -321,9 +439,19 @@ bool ::XamlTypeInfo::InfoProvider::XamlUserType::IsLocalType::get()
     return _provider->GetXamlTypeByName(_itemTypeName);
 }
 
+void ::XamlTypeInfo::InfoProvider::XamlUserType::ItemTypeName::set(::Platform::String^ value)
+{
+    _itemTypeName = value;
+}
+
 ::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlUserType::KeyType::get()
 {
     return _provider->GetXamlTypeByName(_keyTypeName);
+}
+
+void ::XamlTypeInfo::InfoProvider::XamlUserType::KeyTypeName::set(::Platform::String^ value)
+{
+    _keyTypeName = value;
 }
 
 ::Windows::UI::Xaml::Markup::IXamlMember^ ::XamlTypeInfo::InfoProvider::XamlUserType::GetMember(::Platform::String^ name)
@@ -358,52 +486,14 @@ void ::XamlTypeInfo::InfoProvider::XamlUserType::RunInitializer()
 
 ::Platform::Object^ ::XamlTypeInfo::InfoProvider::XamlUserType::CreateFromString(::Platform::String^ input)
 {
-    return FromStringConverter(this, input);
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetContentPropertyName(::Platform::String^ contentPropertyName)
-{
-    _contentPropertyName = contentPropertyName;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetIsArray()
-{
-    _isArray = true;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetIsMarkupExtension()
-{
-    _isMarkupExtension = true;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetIsEnum()
-{
-    _isEnum = true;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetIsBindable()
-{
-    _isBindable = true;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetIsReturnTypeStub()
-{
-    _isReturnTypeStub = true;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetIsLocalType()
-{
-    _isLocalType = true;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetItemTypeName(::Platform::String^ itemTypeName)
-{
-    _itemTypeName = itemTypeName;
-}
-
-void ::XamlTypeInfo::InfoProvider::XamlUserType::SetKeyTypeName(::Platform::String^ keyTypeName)
-{
-    _keyTypeName = keyTypeName;
+    if (CreateFromStringMethod != nullptr)
+    {
+        return (*CreateFromStringMethod)(input);
+    }
+    else
+    {
+        return FromStringConverter(this, input);
+    }
 }
 
 void ::XamlTypeInfo::InfoProvider::XamlUserType::AddMemberName(::Platform::String^ shortName)
@@ -473,19 +563,15 @@ void ::XamlTypeInfo::InfoProvider::XamlUserType::AddEnumValue(::Platform::String
 {
 }
 
-void ::XamlTypeInfo::InfoProvider::XamlMember::SetIsAttachable()
-{
-    _isAttachable = true;
-}
 
 bool ::XamlTypeInfo::InfoProvider::XamlMember::IsAttachable::get()
 {
     return _isAttachable;
 }
 
-void ::XamlTypeInfo::InfoProvider::XamlMember::SetIsDependencyProperty()
+void ::XamlTypeInfo::InfoProvider::XamlMember::IsAttachable::set(bool value)
 {
-    _isDependencyProperty = true;
+    _isAttachable = value;
 }
 
 bool ::XamlTypeInfo::InfoProvider::XamlMember::IsDependencyProperty::get()
@@ -493,14 +579,19 @@ bool ::XamlTypeInfo::InfoProvider::XamlMember::IsDependencyProperty::get()
     return _isDependencyProperty;
 }
 
-void ::XamlTypeInfo::InfoProvider::XamlMember::SetIsReadOnly()
+void ::XamlTypeInfo::InfoProvider::XamlMember::IsDependencyProperty::set(bool value)
 {
-    _isReadOnly = true;
+    _isDependencyProperty = value;
 }
 
 bool ::XamlTypeInfo::InfoProvider::XamlMember::IsReadOnly::get()
 {
     return _isReadOnly;
+}
+
+void ::XamlTypeInfo::InfoProvider::XamlMember::IsReadOnly::set(bool value)
+{
+    _isReadOnly = value;
 }
 
 ::Platform::String^ ::XamlTypeInfo::InfoProvider::XamlMember::Name::get()
@@ -513,14 +604,14 @@ bool ::XamlTypeInfo::InfoProvider::XamlMember::IsReadOnly::get()
     return _provider->GetXamlTypeByName(_typeName);
 }
 
-void ::XamlTypeInfo::InfoProvider::XamlMember::SetTargetTypeName(::Platform::String^ targetTypeName)
-{
-    _targetTypeName = targetTypeName;
-}
-
 ::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlMember::TargetType::get()
 {
     return _provider->GetXamlTypeByName(_targetTypeName);
+}
+
+void ::XamlTypeInfo::InfoProvider::XamlMember::TargetTypeName::set(::Platform::String^ value)
+{
+    _targetTypeName = value;
 }
 
 ::Platform::Object^ ::XamlTypeInfo::InfoProvider::XamlMember::GetValue(::Platform::Object^ instance)

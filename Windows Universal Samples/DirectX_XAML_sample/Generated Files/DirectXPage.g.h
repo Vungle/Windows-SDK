@@ -12,11 +12,17 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class SwapChainPanel;
-                ref class Grid;
+                ref class TextBlock;
                 ref class Button;
+                ref class Grid;
                 ref class AppBar;
             }
         }
+    }
+}
+namespace VungleSDK {
+    namespace UI {
+        ref class VungleAdControl;
     }
 }
 
@@ -33,13 +39,30 @@ namespace DirectX_XAML_sample
         virtual ::Windows::UI::Xaml::Markup::IComponentConnector^ GetBindingConnector(int connectionId, ::Platform::Object^ target);
     
     private:
+        void UnloadObject(::Windows::UI::Xaml::DependencyObject^ dependencyObject);
+        void DisconnectUnloadedObject(int connectionId);
+    
+    private:
         bool _contentLoaded;
     
+    
         private: ::Windows::UI::Xaml::Controls::SwapChainPanel^ swapChainPanel;
-        private: ::Windows::UI::Xaml::Controls::Grid^ buttonsPanel;
-        private: ::Windows::UI::Xaml::Controls::Button^ DefaultConfigButton;
-        private: ::Windows::UI::Xaml::Controls::Button^ IncentivizedConfigButton;
-        private: ::Windows::UI::Xaml::Controls::Button^ MutedConfigButton;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ appIDTextBlock;
+        private: ::Windows::UI::Xaml::Controls::Button^ InitSDK;
+        private: ::Windows::UI::Xaml::Controls::Grid^ ButtonsPanel;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ placement1TextBlock;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ placement1IDTextBlock;
+        private: ::Windows::UI::Xaml::Controls::Button^ PlayPlacement1;
+        private: ::VungleSDK::UI::VungleAdControl^ embeddedControl;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ placement2TextBlock;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ placement2IDTextBlock;
+        private: ::Windows::UI::Xaml::Controls::Button^ PlayPlacement2;
+        private: ::Windows::UI::Xaml::Controls::Button^ LoadPlacement2;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ placement3TextBlock;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ placement3IDTextBlock;
+        private: ::Windows::UI::Xaml::Controls::Button^ PlayPlacement3;
+        private: ::Windows::UI::Xaml::Controls::Button^ LoadPlacement3;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ cachedTextBlock;
         private: ::Windows::UI::Xaml::Controls::AppBar^ bottomAppBar;
     };
 }

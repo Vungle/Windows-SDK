@@ -1,5 +1,17 @@
 ## Changelog
 
+### VERSION 5.3.2
+* Improved Flex View and Flex Feed support
+* Bug fixes
+
+### VERSION 5.1.0
+* Added Native Flex View and Flex Feed support
+* Added full support for Vungle MRAID
+* Enhanced Placements support
+
+### VERSION 2.0.8
+* Launched new Placements feature
+
 ### VERSION 1.3.16
 * Fix for ad serving issue on devices with certain language locale
 * Fix for stability issue when going from suspended and resume state

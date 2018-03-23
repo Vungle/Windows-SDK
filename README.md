@@ -8,10 +8,20 @@ Once you've created an account you can follow our [Getting Started for Windows G
 ### Requirements
 * Visual Studio 2015, Windows 10.0 or later
 #### Recommendations
-* The latest version of Windows 10 and Visual Studio 2015, cause Microsoft would fix bugs in their latest patch.
-
+* The latest version of Windows 10 and Visual Studio 2015, because Microsoft would fix bugs in their latest patch.
 
 ## Release Notes
+
+### VERSION 5.3.2
+* Additional bug fixes
+
+### VERSION 5.1.0
+* Launched Native (embedded) ads feature and VungleAdControl XAML control
+
+## Release Notes
+### VERSION 2.0.8
+* Launched new Placements feature
+
 ### VERSION 1.3.16
 * Fix for ad serving issue on devices with certain language locale
 * Fix for stability issue when going from suspended and resume state

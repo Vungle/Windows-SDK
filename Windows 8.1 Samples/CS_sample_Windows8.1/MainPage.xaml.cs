@@ -5,64 +5,88 @@ using Windows.UI.Xaml.Controls;
 using VungleSDK;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace CS_sample_Windows8._1
 {
     public sealed partial class MainPage : Page
     {
         VungleAd sdkInstance;
-        bool adPlayable;
+
+        private string appID = "59792a4f057243276200298a";
+        private string placement1 = "DEFAULT18154";
+        private string placement2 = "PLACEME92007";
+        private string placement3 = "REWARDP93292";
 
         public MainPage()
         {
             InitializeComponent();
 
-            // Obtain Vungle SDK instance
-            sdkInstance = AdFactory.GetInstance("Test_Windows");
+            appIDTextBlock.Text = "AppID: " + appID;
+            placement1IDTextBlock.Text = "PlacementID: " + placement1;
+            placement2IDTextBlock.Text = "PlacementID: " + placement2;
+            placement3IDTextBlock.Text = "PlacementID: " + placement3;
+        }
 
-            // Register event handlers
-            sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
-            sdkInstance.OnAdStart           += SdkInstance_OnAdStart;
-            sdkInstance.OnVideoView         += SdkInstance_OnVideoView;
-            sdkInstance.OnAdEnd             += SdkInstance_OnAdEnd;
-            sdkInstance.Diagnostic          += SdkInstance_Diagnostic;
+        //Event handler for OnInitComleted event
+        private async void SdkInstance_OnInitCompleted(object sender, ConfigEventArgs e)
+        {
+            var placementsInfo = "OnInitCompleted: " + e.Initialized;
+            if (e.Initialized == true)
+            {
+                for (var i = 0; i < e.Placements.Length; i++)
+                {
+                    placementsInfo += "\n\tPlacement" + (i + 1) + ": " + e.Placements[i].ReferenceId;
+                    if (e.Placements[i].IsAutoCached == true)
+                        placementsInfo += " (Auto-Cached)";
+                }
+            }
+            else
+            {
+                placementsInfo += "\n\t" + e.ErrorMessage;
+            }
+            System.Diagnostics.Debug.WriteLine(placementsInfo);
+
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() => ChangeLoadButtonsState(e.Initialized)));
         }
 
         // Event handler called when e.AdPlayable is changed
         private async void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e)
         {
-            // e.AdPlayble is true when SDK has an ad ready to be played
-            // e.AdPlayble is false when there is no ad available to play 
-            adPlayable = e.AdPlayable;
-            // Run asynchronously on the UI thread
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                new DispatchedHandler(() => ChangeButtonsState()));
+            // e.AdPlayable - true if an ad is available to play, false otherwise
+            // e.Placement  - placement ID in string
+
+            System.Diagnostics.Debug.WriteLine("OnAdPlayable: " + e.Placement + " - " + e.AdPlayable);
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() => ChangePlayButtonState(e.AdPlayable, e.Placement)));
         }
 
         // Event Handler called before playing an ad
         private void SdkInstance_OnAdStart(object sender, AdEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("OnAdStart(Id: " + e.Id + ")");
+            // e.Id        - Vungle app ID in string
+            // e.Placement - placement ID in string
+
+            System.Diagnostics.Debug.WriteLine("OnAdStart(" + e.Id + "): " + e.Placement);
         }
 
-        // Event handler called each time an ad completes
-        private void SdkInstance_OnVideoView(object sender, AdViewEventArgs e)
-        {
-            // e.IsCompletedView is true when 80% of the video was watched
-            // e.VideoDuration is actual time the user watched the video
-            // e.VideoDuration is total duration of the video displayed
-            System.Diagnostics.Debug.WriteLine("OnVideoView(Id: " + e.Id + ")" +
-               "\n\tIsCompletedView: " + e.IsCompletedView +
-               "\n\tVideoDuration: " + e.VideoDuration +
-               "\n\tWatchedDuration: " + e.WatchedDuration);
-        }
+        // DEPRECATED - use SdkInstance_OnAdEnd() instead
+        private void SdkInstance_OnVideoView(object sender, AdViewEventArgs e) { }
 
         // Event handler called when the user leaves ad and control is return to the hosting app
         private void SdkInstance_OnAdEnd(object sender, AdEndEventArgs e)
         {
-            // e.CallToActionClicked is true when the user has clicked download button on end card
-            System.Diagnostics.Debug.WriteLine("OnAdEnd(Id: " + e.Id + ")" +
-                "\n\tCallToActionClicked: " + e.CallToActionClicked);
+            // e.Id                  - Vungle app ID in string
+            // e.Placement           - placement ID in string
+            // e.IsCompletedView     - true when 80% or more of the video was watched
+            // e.CallToActionClicked - true when the user has clicked download button on end card
+            // e.WatchedDuration     - duration of video watched
+            // e.VideoDuration       - DEPRECATED
+
+            System.Diagnostics.Debug.WriteLine("OnVideoEnd(" + e.Id + "): " +
+               "\n\tPlacement: " + e.Placement +
+               "\n\tIsCompletedView: " + e.IsCompletedView +
+               "\n\tCallToActionClicked: " + e.CallToActionClicked +
+               "\n\tWatchedDuration: " + e.WatchedDuration);
         }
 
         // Event handler called when SDK wants to print diagnostic logs
@@ -71,40 +95,121 @@ namespace CS_sample_Windows8._1
             System.Diagnostics.Debug.WriteLine(e.Level + " " + e.Type + " " + e.Exception + " " + e.Message);
         }
 
-        private void ChangeButtonsState()
+        private void InitSDK_Click(Object sender, RoutedEventArgs e)
         {
-            // Change IsEnabled property for each button
-            DefaultConfigButton.IsEnabled = adPlayable;
-            IncentivizedConfigButton.IsEnabled = adPlayable;
-            MutedConfigButton.IsEnabled = adPlayable;
+            //Obtain Vungle SDK instance
+            sdkInstance = AdFactory.GetInstance(appID, new string[] { placement1, placement2, placement3 });
+
+            //Register event handlers
+            sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
+            sdkInstance.OnAdStart += SdkInstance_OnAdStart;
+            sdkInstance.OnAdEnd += SdkInstance_OnAdEnd;
+            sdkInstance.Diagnostic += SdkInstance_Diagnostic;
+            sdkInstance.OnInitCompleted += SdkInstance_OnInitCompleted;
+
+            InitSDK.IsEnabled = false;
         }
 
-        private async void DefaultConfigButton_Click(object sender, RoutedEventArgs e)
+        private void LoadPlacement2_Click(Object sender, RoutedEventArgs e)
         {
-            // Play ad with default configuration
-            await sdkInstance.PlayAdAsync(new AdConfig());
+            //Load ad for placement2
+            sdkInstance.LoadAd(placement2);
         }
 
-        private async void IncentivizedConfigButton_Click(object sender, RoutedEventArgs e)
+        private void LoadPlacement3_Click(Object sender, RoutedEventArgs e)
         {
-            // Play ad with enabled 'incentivized' option
-            // IncentivizedDialog objects are used only when incentivied is set to true
-            // Default values are assigned for illustrative purpose for Body, CloseButton, ContinueButton 
-            await sdkInstance.PlayAdAsync(new AdConfig
+            //Load ad for placement3
+            sdkInstance.LoadAd(placement3);
+        }
+
+        private async void PlayPlacement1_Click(Object sender, RoutedEventArgs e)
+        {
+            //Play ad for placement1
+            await sdkInstance.PlayAdAsync(new AdConfig(), placement1);
+        }
+
+        private async void PlayPlacement2_Click(Object sender, RoutedEventArgs e)
+        {
+            //Play ad for placement2
+            embeddedControl.AppID = appID;
+            embeddedControl.Placements = placement1 + "," + placement2 + "," + placement3;
+            embeddedControl.Placement = placement2;
+            embeddedControl.SoundEnabled = false;
+
+            embeddedControl.OnAdStart += Embedded_OnAdStart;
+            embeddedControl.OnAdEnd += Embedded_OnAdEnd;
+
+            var nEmb = await embeddedControl.PlayAdAsync();
+        }
+
+        private async void PlayPlacement3_Click(Object sender, RoutedEventArgs e)
+        {
+            //Play ad for placement3
+            AdConfig adConfig = new AdConfig();
+
+            adConfig.IncentivizedDialogBody = "Are you sure you want to skip this ad? You must finish watching to claim your reward.";
+            adConfig.IncentivizedDialogCloseButton = "Close";
+            adConfig.IncentivizedDialogContinueButton = "Continue";
+            adConfig.IncentivizedDialogTitle = "Close this ad?";
+            adConfig.UserId = "VungleTest";
+
+            await sdkInstance.PlayAdAsync(adConfig, placement3);
+        }
+
+        private void ChangeLoadButtonsState(bool isInitialized)
+        {
+            LoadPlacement2.IsEnabled = isInitialized;
+            LoadPlacement3.IsEnabled = isInitialized;
+        }
+
+        private void ChangePlayButtonState(bool adPlayable, string placement)
+        {
+            if (placement.Equals(placement1))
             {
-                Incentivized = true,
-                UserId = "VungleTestUser",                          // Default: null
-                IncentivizedDialogTitle = "Close Incentivized Ad",  // Default: null
-                IncentivizedDialogBody = "Are you sure you want to skip this ad? If you do, you might not get your reward",
-                IncentivizedDialogCloseButton = "Close",
-                IncentivizedDialogContinueButton = "Continue Watching"
+                PlayPlacement1.IsEnabled = adPlayable;
+            }
+            else if (placement.Equals(placement2))
+            {
+                PlayPlacement2.IsEnabled = adPlayable;
+            }
+            else if (placement.Equals(placement3))
+            {
+                PlayPlacement3.IsEnabled = adPlayable;
+            }
+        }
+
+        private void AnimateHeight(double value)
+        {
+            var anim = new DoubleAnimation()
+            {
+                From = embeddedControl.Height,
+                To = value,
+                Duration = TimeSpan.FromMilliseconds(500),
+                EnableDependentAnimation = true
+            };
+            Storyboard.SetTarget(anim, embeddedControl);
+            Storyboard.SetTargetProperty(anim, "Height");
+            var sb = new Storyboard();
+            sb.Children.Add(anim);
+            sb.Begin();
+        }
+
+        // Event Handler called before playing an ad
+        private void Embedded_OnAdStart(object sender, AdEventArgs e)
+        {
+            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                AnimateHeight(200);
             });
         }
 
-        private async void MutedConfigButton_Click(object sender, RoutedEventArgs e)
+        // Event handler called when the user leaves ad and control is return to the hosting app
+        private void Embedded_OnAdEnd(object sender, AdEndEventArgs e)
         {
-            // Play ad with sound muted
-            await sdkInstance.PlayAdAsync(new AdConfig { SoundEnabled = false });
+            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                AnimateHeight(1);
+            });
         }
     }
 }
