@@ -18,7 +18,6 @@ Once you've created an account you can follow our [Getting Started for Windows G
 ### VERSION 5.1.0
 * Launched Native (embedded) ads feature and VungleAdControl XAML control
 
-## Release Notes
 ### VERSION 2.0.8
 * Launched new Placements feature
 
