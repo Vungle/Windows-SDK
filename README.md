@@ -12,6 +12,11 @@ Once you've created an account you can follow our [Getting Started for Windows G
 
 ## Release Notes
 
+### VERSION 6.2.0
+* GDPR Compliance
+* License updated
+* Bug Fixes
+
 ### VERSION 5.3.2
 * Additional bug fixes
 
@@ -43,7 +48,7 @@ Once you've created an account you can follow our [Getting Started for Windows G
 * Initial release
 
 ### Integration
-NOTE: This document contains examples written in C#. View code for more examples. Sample apps shows how to integrate the Vungle Windows SDK into an Windows 10 Universal Application or Windows 8.1 Application or Windows Phone 8.1 Application. There are three groups of the samples:  
+NOTE: This document contains examples written in C++ and C#. View code for more examples. Sample apps shows how to integrate the Vungle Windows SDK into an Windows 10 Universal Application or Windows 8.1 Application or Windows Phone 8.1 Application. There are three groups of the samples:  
 
 1. Windows Universal Apps:
   1. CS_sample

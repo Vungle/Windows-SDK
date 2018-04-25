@@ -1,5 +1,10 @@
 ## Changelog
 
+### VERSION 6.2.0
+* GDPR Compliance
+* License updated
+* Bug Fixes
+
 ### VERSION 5.3.2
 * Improved Flex View and Flex Feed support
 * Bug fixes
