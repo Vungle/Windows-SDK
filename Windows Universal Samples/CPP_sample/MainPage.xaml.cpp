@@ -138,7 +138,6 @@ void CPP_sample::MainPage::OnAdStart(Platform::Object^ sender, VungleSDK::AdEven
 
 	OutputDebugStringA(dmess.str().c_str());
 
-	//sdkInstance->LoadAd(ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
 }
 
 // DEPRECATED - use SdkInstance_OnAdEnd() instead
@@ -168,8 +167,6 @@ void CPP_sample::MainPage::OnAdEnd(Platform::Object^ sender, VungleSDK::AdEndEve
 
 	OutputDebugStringA(dmess.str().c_str());
 
-
-	//sdkInstance->LoadAd(ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
 }
 
 // Event handler called when SDK wants to print diagnostic logs
@@ -201,9 +198,6 @@ void CPP_sample::MainPage::Diagnostic(Platform::Object^ sender, VungleSDK::Diagn
 void CPP_sample::MainPage::InitSDK_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 
-	//Platform::Array<Platform::String^>^ placementsAlt = ref new Platform::Array<Platform::String^>(3);
-	//placementsAlt[0] = ref new Platform::String(std::wstring(placement1.begin(), placement1.end()).c_str());
-
 	//Obtain Vungle SDK instance
 	Platform::Array<Platform::String^>^ placements = ref new Platform::Array<Platform::String^>(3);
 	placements[0] = ref new Platform::String(std::wstring(placement1.begin(), placement1.end()).c_str());
@@ -211,18 +205,99 @@ void CPP_sample::MainPage::InitSDK_Click(Platform::Object^ sender, Windows::UI::
 	placements[2] = ref new Platform::String(std::wstring(placement3.begin(), placement3.end()).c_str());
 	sdkInstance = AdFactory::GetInstance(ref new Platform::String(std::wstring(appID.begin(), appID.end()).c_str()), placements);
 
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
+
 	//Register event handlers
 	sdkInstance->OnAdPlayableChanged += ref new EventHandler<VungleSDK::AdPlayableEventArgs ^>(this, &CPP_sample::MainPage::OnOnAdPlayableChanged);
 	sdkInstance->OnAdStart += ref new EventHandler<VungleSDK::AdEventArgs ^>(this, &CPP_sample::MainPage::OnAdStart);
 	sdkInstance->OnAdEnd += ref new EventHandler<VungleSDK::AdEndEventArgs ^>(this, &CPP_sample::MainPage::OnAdEnd);
-	//sdkInstance->Diagnostic += ref new EventHandler<VungleSDK::DiagnosticLogEvent ^>(this, &CPP_sample::MainPage::Diagnostic);
+	sdkInstance->Diagnostic += ref new EventHandler<VungleSDK::DiagnosticLogEvent ^>(this, &CPP_sample::MainPage::Diagnostic);
 	sdkInstance->OnInitCompleted += ref new EventHandler<VungleSDK::ConfigEventArgs ^>(this, &CPP_sample::MainPage::OnInitCompleted);
 
 	this->InitSDK->IsEnabled = false;
 }
 
+void CPP_sample::MainPage::ToggleConsent_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e)
+{
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
+	std::stringstream dmess;
+	size_t converted;
+	
+
+	auto ourStatus = sdkInstance->GetCurrentConsentStatus();
+
+	if (!ourStatus)
+	{
+		dmess << std::endl << "Consent is currently set to unknown!" << std::endl;
+
+		OutputDebugStringA(dmess.str().c_str());
+		return;
+	}
+
+	dmess << std::endl << "Consent has been toggled to ";
+		if (ourStatus->Value == VungleConsentStatus::VungleConsentDenied)
+		{
+			sdkInstance->UpdateConsentStatus(VungleConsentStatus::VungleConsentAccepted);
+			dmess << "Accepted!" << std::endl;
+		}
+		else
+		{
+			sdkInstance->UpdateConsentStatus(VungleConsentStatus::VungleConsentDenied);
+			dmess << "Denied!" << std::endl;
+		}
+
+
+	OutputDebugStringA(dmess.str().c_str());
+}
+
+void CPP_sample::MainPage::GetConsent_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e)
+{
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
+	std::stringstream dmess;
+	size_t converted;
+
+	auto ourStatus = sdkInstance->GetCurrentConsentStatus();
+
+	if (!ourStatus)
+	{
+		dmess << std::endl << "Consent is currently set to unknown!" << std::endl;
+
+		OutputDebugStringA(dmess.str().c_str());
+		return;
+	}
+	
+
+	if (ourStatus->Value == VungleConsentStatus::VungleConsentAccepted)
+	{
+		dmess << std::endl << "Consent is currently set to Accepted!" << std::endl;
+	}
+	else
+	{
+		dmess << std::endl << "Consent is currently set to Denied!" << std::endl;
+	}
+
+	OutputDebugStringA(dmess.str().c_str());
+}
+
 void CPP_sample::MainPage::LoadPlacement2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
 	//Load ad for placement2
 	std::stringstream dmess;
 	size_t converted;
@@ -237,6 +312,11 @@ void CPP_sample::MainPage::LoadPlacement2_Click(Platform::Object^ sender, Window
 
 void CPP_sample::MainPage::LoadPlacement3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
 	std::stringstream dmess;
 	size_t converted;
 
@@ -251,6 +331,11 @@ void CPP_sample::MainPage::LoadPlacement3_Click(Platform::Object^ sender, Window
 
 void CPP_sample::MainPage::PlayPlacement1_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
 	sdkInstance->LoadAd(ref new Platform::String(std::wstring(placement2.begin(), placement2.end()).c_str()));
 	//Play ad for placement1
 	sdkInstance->PlayAdAsync(ref new AdConfig, ref new Platform::String(std::wstring(placement1.begin(), placement1.end()).c_str()));
@@ -258,6 +343,11 @@ void CPP_sample::MainPage::PlayPlacement1_Click(Platform::Object^ sender, Window
 
 void CPP_sample::MainPage::PlayPlacement2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	//nullptr check
+	if (!embeddedControl)
+	{
+		return;
+	}
 	//Play ad for placement2
 	embeddedControl->AppID = ref new Platform::String(std::wstring(appID.begin(), appID.end()).c_str());
 	std::string str = placement1 + "," + placement2 + "," + placement3;
@@ -272,14 +362,19 @@ void CPP_sample::MainPage::PlayPlacement2_Click(Platform::Object^ sender, Window
 
 void CPP_sample::MainPage::PlayPlacement3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
 	//Play ad for placement3
 	AdConfig ^adConfig = ref new AdConfig;
 
-	//adConfig->IncentivizedDialogBody = "Custom Text Here";
-	//adConfig->IncentivizedDialogCloseButton = "Close";
-	//adConfig->IncentivizedDialogContinueButton = "Continue";
-	//adConfig->IncentivizedDialogTitle = "Title";
-	//adConfig->UserId = "TestUserID";
+	adConfig->IncentivizedDialogBody = "Custom Text Here";
+	adConfig->IncentivizedDialogCloseButton = "Close";
+	adConfig->IncentivizedDialogContinueButton = "Continue";
+	adConfig->IncentivizedDialogTitle = "Title";
+	adConfig->UserId = "TestUserID";
 
 	//sdkInstance->SetFlexViewCloseTimeInSec(ref new Platform::String(std::wstring(placement3.begin(), placement3.end()).c_str()), 5);
 	
@@ -288,6 +383,11 @@ void CPP_sample::MainPage::PlayPlacement3_Click(Platform::Object^ sender, Window
 
 void CPP_sample::MainPage::ClosePlacement_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e)
 {
+	//nullptr check
+	if (!sdkInstance)
+	{
+		return;
+	}
 	//throw ref new Platform::NotImplementedException();
 
 	std::stringstream dmess;
