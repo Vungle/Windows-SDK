@@ -1,5 +1,13 @@
 ## Changelog
 
+### VERSION 6.3.0
+* Bug fixes
+
+### VERSION 6.2.0
+* GDPR compliance features added
+* Removed requirement for placements in initialization
+* Flex View and Flex Feed ads can be closed
+
 ### VERSION 5.3.2
 * Improved Flex View and Flex Feed support
 * Bug fixes
