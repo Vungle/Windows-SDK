@@ -13,6 +13,11 @@ namespace CS_sample
     {
         VungleAd sdkInstance;
 
+        //private string appID = "59792a4f057243276200298a";
+        //private string placement1 = "DEFAULT18154";
+        //private string placement2 = "PLACEME92007";
+        //private string placement3 = "REWARDP93292";
+
         private string appID = "598a531697c455bc70001f98";
         private string placement1 = "DEFAULT59086";
         private string placement2 = "NONREWA96669";
@@ -95,9 +100,10 @@ namespace CS_sample
 
         private void InitSDK_Click(Object sender, RoutedEventArgs e)
         {
-            // Obtain Vungle SDK instance
-            // As of v6 including placements in initialization call is no longer required
-            sdkInstance = AdFactory.GetInstance(appID);
+            string[] placementList = new string[] { placement1, placement2, placement3 };
+
+            //Obtain Vungle SDK instance
+            sdkInstance = AdFactory.GetInstance(appID, placementList);
 
             //Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
