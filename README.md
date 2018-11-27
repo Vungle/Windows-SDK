@@ -3,7 +3,7 @@
 ## Getting Started
 To get up and running with Vungle, you'll need to [Create an Account With Vungle](https://v.vungle.com/dashboard) and [Add an Application to the Vungle Dashboard](https://support.vungle.com/hc/en-us/articles/210468678)
 
-Once you've created an account you can follow our [Getting Started for Windows Guide](https://support.vungle.com/hc/en-us/articles/360003059331-Get-Started-with-Vungle-Windows-SDK-v-6-2) to complete the integration. Remember to get the Vungle App ID from the Vungle dashboard.
+Once you've created an account you can follow our [Getting Started for Windows Guide](https://support.vungle.com/hc/en-us/articles/360003059331) to complete the integration. Remember to get the Vungle App ID from the Vungle dashboard.
 
 ### Requirements
 * Visual Studio 2015, Windows 10.0 or later
