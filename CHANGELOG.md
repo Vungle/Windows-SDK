@@ -1,6 +1,7 @@
 ## Changelog
 
 ### VERSION 6.3.0
+* Volume control added
 * Bug fixes
 
 ### VERSION 6.2.0

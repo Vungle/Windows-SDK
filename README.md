@@ -13,6 +13,7 @@ Once you've created an account you can follow our [Getting Started for Windows G
 ## Release Notes
 
 ### VERSION 6.3.0
+* Volume control added
 * Bug fixes
 
 ### VERSION 6.2.0
