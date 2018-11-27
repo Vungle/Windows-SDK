@@ -1,7 +1,10 @@
 ## Changelog
 
 ### VERSION 6.3.0
-* Volume control added
+* Auto-cache placement no longer required
+* Simplified initialization requirement; all placement IDs no longer required
+* Volume control added for ad playback
+* GDPR consent message version tracking
 * Bug fixes
 
 ### VERSION 6.2.0
