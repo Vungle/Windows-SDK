@@ -134,9 +134,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="VungleSDK, Version=5.3.2.4, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="VungleSDK, Version=6.3.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\VungleSDK6.3.0_RC3\win10\VungleSDK.winmd</HintPath>
+      <HintPath>..\..\VungleSDK\VungleSDK.winmd</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
