@@ -99,6 +99,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <PackageCertificateKeyFile>CPP_sample_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>85777D98D083378CCFA1DF0CF29B2DE89CCB573B</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
