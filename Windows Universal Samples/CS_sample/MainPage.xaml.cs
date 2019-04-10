@@ -99,6 +99,13 @@ namespace CS_sample
             // As of v6 including placements in initialization call is no longer required
             sdkInstance = AdFactory.GetInstance(appID);
 
+            // SDK Config: additional options
+            // Set minimum disk space required to initialize or load ads (in bytes)
+            //VungleSDKConfig sdkConfig = new VungleSDKConfig();
+            //sdkConfig.MinimumDiskSpaceForAd = 50 * 1024 * 1024;
+            //sdkConfig.MinimumDiskSpaceForInit = 50 * 1024 * 1024;
+            //sdkInstance = AdFactory.GetInstance(appID, sdkConfig)
+
             //Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
             sdkInstance.OnAdStart += SdkInstance_OnAdStart;
