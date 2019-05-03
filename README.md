@@ -12,6 +12,12 @@ Once you've created an account you can follow our [Getting Started for Windows G
 
 ## Release Notes
 
+### VERSION 6.4.0
+* Cache Optimization - Multiple placements are optimized for cached ad availability under the hood when the SDK initializes. No additional work from developer needed.
+* Privacy By Design - Improved attribution accuracy for privacy devices. Removal of latitude and longitude collection to protect users.
+* Publisher controls to override minimum disk requirements, helping to ensure a good user experience.
+* Publishers can now restrict from passing Hardware ID from device to the SDK
+
 ### VERSION 6.3.0
 * Auto-cache placement no longer required
 * Simplified initialization requirement; all placement IDs no longer required
