@@ -106,6 +106,9 @@ namespace CS_sample
             //sdkConfig.MinimumDiskSpaceForInit = 50 * 1024 * 1024;
             //sdkInstance = AdFactory.GetInstance(appID, sdkConfig)
 
+            //Disable tracking of Hardare ID
+            //sdkConfig.DisableAshwidTracking = true;
+
             //Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
             sdkInstance.OnAdStart += SdkInstance_OnAdStart;
