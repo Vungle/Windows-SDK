@@ -115,5 +115,12 @@ NOTE: Make sure that your project has "internetClient" capability in the package
     ...
 </Capabilities>
 ```
+
+## Attributions
+| Component            | Version | Description                                                                                                                      | License                                                                          |
+|----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| MetroLog             | 0.9.0   | MetroLog is a lightweight logging framework designed for Windows Store and Windows Phone 8 apps                                  | [MIT](https://raw.githubusercontent .com/mbrit/MetroLog/master/ LICENSE.txt)     |
+| HockeySDK.WINRT      | 4.1.6   | HockeyApp is a tool to distribute app to developers and testers                                                                  | [MIT](https://github.com/bitstadium /HockeySDK-Windows/blob/ master/LICENSE.txt) |
+| Application Insights | 2.10.0  | Application Insights is an extensible Application Performance Management (APM) service for web developers on multiple platforms. | [MIT](https://github.com/dotnet/core-setup/blob/master/LICENSE.TXT)              |
 ## License
 The Vungle Windows-SDK is available under a commercial license. See the LICENSE.md file for more info.
