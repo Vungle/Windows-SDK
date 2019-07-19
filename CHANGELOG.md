@@ -1,5 +1,8 @@
 ## Changelog
 
+### VERSION 6.4.1
+* General bug fixes 
+
 ### VERSION 6.4.0
 * Cache Optimization - Multiple placements are optimized for cached ad availability under the hood when the SDK initializes. No additional work from developer needed.
 * Privacy By Design - Improved attribution accuracy for privacy devices. Removal of latitude and longitude collection to protect users.
