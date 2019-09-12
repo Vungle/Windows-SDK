@@ -135,8 +135,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="VungleSDK, Version=6.3.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="VungleSDK">
       <HintPath>..\..\VungleSDK\VungleSDK.winmd</HintPath>
     </Reference>
   </ItemGroup>
