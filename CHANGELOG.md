@@ -1,9 +1,9 @@
 ## Changelog
 
 ### VERSION 6.4.1
-Cache Optimization — Automatically optimizes ad caching to ensure ads are available faster. No additional work from developer needed.
-Privacy by Design — Improved attribution accuracy for privacy devices. Removal of latitude and longitude collection to protect users.
-Publisher controls to override minimum disk requirements, helping to ensure good user experiences.
+* Cache Optimization — Automatically optimizes ad caching to ensure ads are available faster. No additional work from developer needed.
+* Privacy by Design — Improved attribution accuracy for privacy devices. Removal of latitude and longitude collection to protect users.
+* Publisher controls to override minimum disk requirements, helping to ensure good user experiences.
 
 ### VERSION 6.3.0
 * Auto-cache placement no longer required
