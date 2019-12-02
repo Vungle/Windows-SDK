@@ -12,9 +12,14 @@ Once you've created an account you can follow our [Getting Started for Windows G
 
 ## Release Notes
 
+### VERSION 6.5.1
+* Introduction of banner format
+* Continuous improvements to ad caching
+* Squashed many other bugs 
+
 ### VERSION 6.4.1
-* Cache Optimization — Automatically optimizes ad caching to ensure ads are available faster. No additional work from developer needed.
-* Privacy by Design — Improved attribution accuracy for privacy devices. Removal of latitude and longitude collection to protect users.
+* Cache Optimization â€” Automatically optimizes ad caching to ensure ads are available faster. No additional work from developer needed.
+* Privacy by Design â€” Improved attribution accuracy for privacy devices. Removal of latitude and longitude collection to protect users.
 * Publisher controls to override minimum disk requirements, helping to ensure good user experiences.
 
 ### VERSION 6.3.0
