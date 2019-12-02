@@ -58,6 +58,12 @@ template<typename TDeclaringType, typename TValue>
 }
 
 template<typename TDeclaringType>
+::Platform::Object^ GetReferenceTypeMember_AdConfig(::Platform::Object^ instance)
+{
+    return safe_cast<TDeclaringType^>(instance)->AdConfig;
+}
+
+template<typename TDeclaringType>
 ::Platform::Object^ GetReferenceTypeMember_AppID(::Platform::Object^ instance)
 {
     return safe_cast<TDeclaringType^>(instance)->AppID;
@@ -127,6 +133,12 @@ template<typename TDeclaringType, typename TValue>
 void SetValueTypeMember_BackButtonImmediatelyEnabled(::Platform::Object^ instance, ::Platform::Object^ value)
 {
     safe_cast<TDeclaringType^>(instance)->BackButtonImmediatelyEnabled = safe_cast<::Platform::IBox<TValue>^>(value)->Value;
+}
+
+template<typename TDeclaringType, typename TValue>
+void SetReferenceTypeMember_AdConfig(::Platform::Object^ instance, ::Platform::Object^ value)
+{
+    safe_cast<TDeclaringType^>(instance)->AdConfig = safe_cast<TValue^>(value);
 }
 
 template<typename TDeclaringType, typename TValue>
@@ -212,46 +224,58 @@ struct TypeInfo
 const TypeInfo TypeInfos[] = 
 {
     //   0
-    L"String", L"",
+    L"Object", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //   1
-    L"Boolean", L"",
+    L"String", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //   2
+    L"Boolean", L"",
+    nullptr, nullptr, nullptr, nullptr,
+    -1,
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
+    //   3
+    L"VungleSDK.AdConfig", L"",
+    nullptr, nullptr, nullptr, nullptr,
+    0, // Object
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    TypeInfo_Flags_IsReturnTypeStub | TypeInfo_Flags_None,
+    //   4
     L"CPP_sample.MainPage", L"",
     &ActivateType<::CPP_sample::MainPage>, nullptr, nullptr, nullptr,
-    4, // Windows.UI.Xaml.Controls.Page
+    6, // Windows.UI.Xaml.Controls.Page
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
-    //   3
+    //   5
     L"VungleSDK.UI.VungleAdControl", L"",
     &ActivateType<::VungleSDK::UI::VungleAdControl>, nullptr, nullptr, nullptr,
-    5, // Windows.UI.Xaml.Controls.UserControl
+    7, // Windows.UI.Xaml.Controls.UserControl
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     TypeInfo_Flags_None,
-    //   4
+    //   6
     L"Windows.UI.Xaml.Controls.Page", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    12, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
-    //   5
+    //   7
     L"Windows.UI.Xaml.Controls.UserControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    12, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  Last type here is for padding
     L"", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1, 
-    12, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     TypeInfo_Flags_None,
 };
 
@@ -263,37 +287,37 @@ const UINT TypeInfoLookup[] = {
       0,   //   4
       0,   //   5
       0,   //   6
-      1,   //   7
-      2,   //   8
-      2,   //   9
-      2,   //  10
-      2,   //  11
-      2,   //  12
-      2,   //  13
-      2,   //  14
-      2,   //  15
-      2,   //  16
-      2,   //  17
-      2,   //  18
-      2,   //  19
-      3,   //  20
-      3,   //  21
-      3,   //  22
-      3,   //  23
-      3,   //  24
-      3,   //  25
-      3,   //  26
-      3,   //  27
-      3,   //  28
-      4,   //  29
-      5,   //  30
-      5,   //  31
-      5,   //  32
-      5,   //  33
-      5,   //  34
-      5,   //  35
-      5,   //  36
-      6,   //  37
+      2,   //   7
+      3,   //   8
+      3,   //   9
+      3,   //  10
+      3,   //  11
+      3,   //  12
+      3,   //  13
+      3,   //  14
+      3,   //  15
+      3,   //  16
+      3,   //  17
+      3,   //  18
+      4,   //  19
+      5,   //  20
+      5,   //  21
+      5,   //  22
+      5,   //  23
+      5,   //  24
+      5,   //  25
+      5,   //  26
+      5,   //  27
+      5,   //  28
+      6,   //  29
+      7,   //  30
+      7,   //  31
+      7,   //  32
+      7,   //  33
+      7,   //  34
+      7,   //  35
+      7,   //  36
+      8,   //  37
 };
 
 struct MemberInfo 
@@ -310,88 +334,95 @@ struct MemberInfo
 
 const MemberInfo MemberInfos[] = 
 {
-    //   0 - VungleSDK.UI.VungleAdControl.AppID
+    //   0 - VungleSDK.UI.VungleAdControl.AdConfig
+    L"AdConfig",
+    &GetReferenceTypeMember_AdConfig<::VungleSDK::UI::VungleAdControl>,
+    &SetReferenceTypeMember_AdConfig<::VungleSDK::UI::VungleAdControl, ::VungleSDK::AdConfig>,
+    3, // VungleSDK.AdConfig
+    -1,
+    false, false, false,
+    //   1 - VungleSDK.UI.VungleAdControl.AppID
     L"AppID",
     &GetReferenceTypeMember_AppID<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_AppID<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //   1 - VungleSDK.UI.VungleAdControl.Placements
+    //   2 - VungleSDK.UI.VungleAdControl.Placements
     L"Placements",
     &GetReferenceTypeMember_Placements<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_Placements<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //   2 - VungleSDK.UI.VungleAdControl.Placement
+    //   3 - VungleSDK.UI.VungleAdControl.Placement
     L"Placement",
     &GetReferenceTypeMember_Placement<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_Placement<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //   3 - VungleSDK.UI.VungleAdControl.ApiEndpoint
+    //   4 - VungleSDK.UI.VungleAdControl.ApiEndpoint
     L"ApiEndpoint",
     &GetReferenceTypeMember_ApiEndpoint<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_ApiEndpoint<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //   4 - VungleSDK.UI.VungleAdControl.CleanStart
+    //   5 - VungleSDK.UI.VungleAdControl.CleanStart
     L"CleanStart",
     &GetValueTypeMember_CleanStart<::VungleSDK::UI::VungleAdControl, ::Platform::Boolean>,
     &SetValueTypeMember_CleanStart<::VungleSDK::UI::VungleAdControl, ::Platform::Boolean>,
-    1, // Boolean
+    2, // Boolean
     -1,
     false, false, false,
-    //   5 - VungleSDK.UI.VungleAdControl.UserId
+    //   6 - VungleSDK.UI.VungleAdControl.UserId
     L"UserId",
     &GetReferenceTypeMember_UserId<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_UserId<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //   6 - VungleSDK.UI.VungleAdControl.SoundEnabled
+    //   7 - VungleSDK.UI.VungleAdControl.SoundEnabled
     L"SoundEnabled",
     &GetValueTypeMember_SoundEnabled<::VungleSDK::UI::VungleAdControl, ::Platform::Boolean>,
     &SetValueTypeMember_SoundEnabled<::VungleSDK::UI::VungleAdControl, ::Platform::Boolean>,
-    1, // Boolean
+    2, // Boolean
     -1,
     false, false, false,
-    //   7 - VungleSDK.UI.VungleAdControl.BackButtonImmediatelyEnabled
+    //   8 - VungleSDK.UI.VungleAdControl.BackButtonImmediatelyEnabled
     L"BackButtonImmediatelyEnabled",
     &GetValueTypeMember_BackButtonImmediatelyEnabled<::VungleSDK::UI::VungleAdControl, ::Platform::Boolean>,
     &SetValueTypeMember_BackButtonImmediatelyEnabled<::VungleSDK::UI::VungleAdControl, ::Platform::Boolean>,
-    1, // Boolean
+    2, // Boolean
     -1,
     false, false, false,
-    //   8 - VungleSDK.UI.VungleAdControl.IncentivizedDialogTitle
+    //   9 - VungleSDK.UI.VungleAdControl.IncentivizedDialogTitle
     L"IncentivizedDialogTitle",
     &GetReferenceTypeMember_IncentivizedDialogTitle<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_IncentivizedDialogTitle<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //   9 - VungleSDK.UI.VungleAdControl.IncentivizedDialogBody
+    //  10 - VungleSDK.UI.VungleAdControl.IncentivizedDialogBody
     L"IncentivizedDialogBody",
     &GetReferenceTypeMember_IncentivizedDialogBody<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_IncentivizedDialogBody<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //  10 - VungleSDK.UI.VungleAdControl.IncentivizedDialogCloseButton
+    //  11 - VungleSDK.UI.VungleAdControl.IncentivizedDialogCloseButton
     L"IncentivizedDialogCloseButton",
     &GetReferenceTypeMember_IncentivizedDialogCloseButton<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_IncentivizedDialogCloseButton<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
-    //  11 - VungleSDK.UI.VungleAdControl.IncentivizedDialogContinueButton
+    //  12 - VungleSDK.UI.VungleAdControl.IncentivizedDialogContinueButton
     L"IncentivizedDialogContinueButton",
     &GetReferenceTypeMember_IncentivizedDialogContinueButton<::VungleSDK::UI::VungleAdControl>,
     &SetReferenceTypeMember_IncentivizedDialogContinueButton<::VungleSDK::UI::VungleAdControl, ::Platform::String>,
-    0, // String
+    1, // String
     -1,
     false, false, false,
 };

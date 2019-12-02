@@ -13,10 +13,10 @@ namespace CS_sample
     {
         VungleAd sdkInstance;
 
-        private string appID = "598a531697c455bc70001f98";
-        private string placement1 = "DEFAULT59086";
-        private string placement2 = "NONREWA96669";
-        private string placement3 = "REWARDE30999";
+        private string appID = "59d69544a81a003c1700429a";
+        private string placement1 = "DEFAULT23592";
+        private string placement2 = "DTEMPNO46561";
+        private string placement3 = "DTEMPRW88428";
 
         public MainPage()
         {
@@ -38,7 +38,14 @@ namespace CS_sample
                 {
                     placementsInfo += "\n\tPlacement" + (i + 1) + ": " + e.Placements[i].ReferenceId;
                     if (e.Placements[i].IsAutoCached == true)
+                    {
                         placementsInfo += " (Auto-Cached)";
+                    }
+
+                    if (e.Placements[i].IsIncentivized == true)
+                    {
+                        placementsInfo += " (Rewarded)";
+                    }
                 }
             }
             else
@@ -47,6 +54,12 @@ namespace CS_sample
             }
             System.Diagnostics.Debug.WriteLine(placementsInfo);
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() => ChangeLoadButtonsState(e.Initialized)));
+
+            // Banner ad
+            await vungleBannerControl.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                this.vungleBannerControl.LoadAndPlayBannerAd("BANNER-8756836", VungleBannerSizes.Banner_320x50);
+            });
         }
 
         // Event handler called when e.AdPlayable is changed
@@ -67,9 +80,6 @@ namespace CS_sample
             System.Diagnostics.Debug.WriteLine("OnAdStart(" + e.Id + "): " + e.Placement);
         }
 
-        // DEPRECATED - use SdkInstance_OnAdEnd() instead
-        private void SdkInstance_OnVideoView(object sender, AdViewEventArgs e) { }
-
         // Event handler called when the user leaves ad and control is return to the hosting app
         private void SdkInstance_OnAdEnd(object sender, AdEndEventArgs e)
         {
@@ -84,7 +94,8 @@ namespace CS_sample
                "\n\tPlacement: " + e.Placement +
                "\n\tIsCompletedView: " + e.IsCompletedView +
                "\n\tCallToActionClicked: " + e.CallToActionClicked +
-               "\n\tWatchedDuration: " + e.WatchedDuration);
+               "\n\tWatchedDuration: " + e.WatchedDuration +
+               "\n\tMSFTNotify: " + e.MSFTNotify);
         }
 
         // Event handler called when SDK wants to print diagnostic logs
@@ -95,19 +106,25 @@ namespace CS_sample
 
         private void InitSDK_Click(Object sender, RoutedEventArgs e)
         {
-            // Obtain Vungle SDK instance
-            // As of v6 including placements in initialization call is no longer required
-            sdkInstance = AdFactory.GetInstance(appID);
-
             // SDK Config: additional options
+            VungleSDKConfig sdkConfig = new VungleSDKConfig();
+
             // Set minimum disk space required to initialize or load ads (in bytes)
-            //VungleSDKConfig sdkConfig = new VungleSDKConfig();
-            //sdkConfig.MinimumDiskSpaceForAd = 50 * 1024 * 1024;
-            //sdkConfig.MinimumDiskSpaceForInit = 50 * 1024 * 1024;
-            //sdkInstance = AdFactory.GetInstance(appID, sdkConfig)
+            //sdkConfig.MinimumDiskSpaceForAd = 50 * 1024;
+            //sdkConfig.MinimumDiskSpaceForInit = 50 * 1024;
 
             //Disable tracking of Hardare ID
             //sdkConfig.DisableAshwidTracking = true;
+
+            sdkConfig.DisableBannerRefresh = false;
+
+            // Obtain Vungle SDK instance
+            sdkInstance = AdFactory.GetInstance(appID, sdkConfig);
+
+            this.vungleBannerControl.AppID = appID;
+            this.vungleBannerControl.ApiEndpoint = "https://apiqa.vungle.com/api/v5/";
+
+            sdkInstance.UpdateConsentStatus(VungleConsentStatus.VungleConsentAccepted, "1.0");
 
             //Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
@@ -144,7 +161,7 @@ namespace CS_sample
             embeddedControl.AppID = appID;
             embeddedControl.Placements = placement1 + "," + placement2 + "," + placement3;
             embeddedControl.Placement = placement2;
-            //embeddedControl.SoundEnabled = false;
+            embeddedControl.SoundEnabled = false;
 
             embeddedControl.OnAdStart += Embedded_OnAdStart;
             embeddedControl.OnAdEnd += Embedded_OnAdEnd;
@@ -159,12 +176,12 @@ namespace CS_sample
             //Play ad for placement3
             AdConfig adConfig = new AdConfig();
 
-            adConfig.IncentivizedDialogBody = null;
-            adConfig.IncentivizedDialogCloseButton = "";
-            adConfig.IncentivizedDialogContinueButton = "";
-            adConfig.IncentivizedDialogTitle = "";
+            adConfig.IncentivizedDialogBody = "VBody";
+            adConfig.IncentivizedDialogCloseButton = "VClose";
+            adConfig.IncentivizedDialogContinueButton = "VContinue";
+            adConfig.IncentivizedDialogTitle = "VTitle";
             adConfig.UserId = "VTest";
-            adConfig.Volume = 1.0;
+            adConfig.Volume = 0.50;
 
             await sdkInstance.PlayAdAsync(adConfig, placement3);
         }
@@ -212,7 +229,7 @@ namespace CS_sample
         {
             var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                    AnimateHeight(200);
+                AnimateHeight(250);
             });
         }
 
@@ -221,7 +238,7 @@ namespace CS_sample
         {
             var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                    AnimateHeight(1);
+                AnimateHeight(1);
             });
         }
     }

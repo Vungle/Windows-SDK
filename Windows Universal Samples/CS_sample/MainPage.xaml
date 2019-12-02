@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Sample App" FontSize="45" Grid.Row="0"/>
         <TextBlock x:Name="appIDTextBlock" 
@@ -200,6 +201,16 @@
                 IsEnabled="False"
                 FontWeight="Bold"
                 Width="100" Background="#FF204C6D"/>
+        </Grid>
+        <Grid
+            Grid.Row="3">
+            <UI:VungleAdControl x:Name="vungleBannerControl" AutomationProperties.AutomationId="vungleBannerControl"
+                IsBannerAd="True"
+                Width="320" Height="50" HorizontalAlignment="Center">
+                <Border BorderBrush="Black" BorderThickness="1" Margin="10">
+                    <TextBlock Text="Banner ad will show here" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </UI:VungleAdControl>
         </Grid>
     </Grid>
 </Page>
