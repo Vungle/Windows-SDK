@@ -1,5 +1,8 @@
 ## Changelog
 
+### VERSION 6.5.2
+* Programmatic banner support
+
 ### VERSION 6.5.1
 * Introduction of banner format
 * Continuous improvements to ad caching

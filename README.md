@@ -12,6 +12,9 @@ Once you've created an account you can follow our [Getting Started for Windows G
 
 ## Release Notes
 
+### VERSION 6.5.2
+* Programmatic banner support
+
 ### VERSION 6.5.1
 * Introduction of banner format
 * Continuous improvements to ad caching
