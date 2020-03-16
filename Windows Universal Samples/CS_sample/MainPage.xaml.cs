@@ -122,7 +122,6 @@ namespace CS_sample
             sdkInstance = AdFactory.GetInstance(appID, sdkConfig);
 
             this.vungleBannerControl.AppID = appID;
-            this.vungleBannerControl.ApiEndpoint = "https://apiqa.vungle.com/api/v5/";
 
             sdkInstance.UpdateConsentStatus(VungleConsentStatus.VungleConsentAccepted, "1.0");
 
