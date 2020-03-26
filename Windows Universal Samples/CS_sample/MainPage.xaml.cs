@@ -58,7 +58,7 @@ namespace CS_sample
             // Banner ad
             await vungleBannerControl.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                this.vungleBannerControl.LoadAndPlayBannerAd("BANNER-8756836", VungleBannerSizes.Banner_320x50);
+                this.vungleBannerControl.LoadAndPlayBannerAd("BANNER-6853705", VungleBannerSizes.Banner_320x50);
             });
         }
 
