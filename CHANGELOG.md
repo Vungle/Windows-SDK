@@ -1,5 +1,11 @@
 ## Changelog
 
+### VERSION 6.7.0
+* CCPA Support – Compliance with new government regulations while assuring your users their personal data is being used the way they want
+* Multiple banner ad support – Display multiple banners on the screen to leverage more ways to monetize your inventory and attract Premium Buyers
+* Backend performance improvements to continually optimize your monetization efforts
+* Various bug fixes
+
 ### VERSION 6.5.2
 * Programmatic banner support
 

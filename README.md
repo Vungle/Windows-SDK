@@ -1,16 +1,20 @@
 # Vungle's Windows SDK
 
 ## Getting Started 
-To get up and running with Vungle, you'll need to [Create an Account With Vungle](https://v.vungle.com/dashboard) and [Add an Application to the Vungle Dashboard](https://support.vungle.com/hc/en-us/articles/210468678)
-
-Once you've created an account you can follow our [Getting Started for Windows Guide](https://support.vungle.com/hc/en-us/articles/360003059331) to complete the integration. Remember to get the Vungle App ID from the Vungle dashboard.
+Please refer to [Integrate Vungle SDK for Windows](https://support.vungle.com/hc/en-us/articles/360003059331) to complete the integration.
 
 ### Requirements
 * Visual Studio 2015, Windows 10.0 or later
 #### Recommendations
-* The latest version of Windows 10 and Visual Studio 2015, because Microsoft would fix bugs in their latest patch.
+* The latest version of Windows 10 and Visual Studio 2017
 
 ## Release Notes
+
+### VERSION 6.7.0
+* CCPA Support – Compliance with new government regulations while assuring your users their personal data is being used the way they want
+* Multiple banner ad support – Display multiple banners on the screen to leverage more ways to monetize your inventory and attract Premium Buyers
+* Backend performance improvements to continually optimize your monetization efforts
+* Various bug fixes
 
 ### VERSION 6.5.2
 * Programmatic banner support
