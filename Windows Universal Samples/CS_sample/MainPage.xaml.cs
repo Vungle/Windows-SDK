@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 // Using VungleSDK namespace
 using VungleSDK;
-using Windows.ApplicationModel.Core;
+
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Animation;
 
@@ -28,7 +29,7 @@ namespace CS_sample
             placement3IDTextBlock.Text = "PlacementID: " + placement3;
         }
 
-        //Event handler for OnInitComleted event
+        // Event handler for OnInitComleted event
         private async void SdkInstance_OnInitCompleted(object sender, ConfigEventArgs e)
         {
             var placementsInfo = "OnInitCompleted: " + e.Initialized;
@@ -52,7 +53,7 @@ namespace CS_sample
             {
                 placementsInfo += "\n\t" + e.ErrorMessage;
             }
-            System.Diagnostics.Debug.WriteLine(placementsInfo);
+            Debug.WriteLine(placementsInfo);
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() => ChangeLoadButtonsState(e.Initialized)));
 
             // Banner ad
@@ -67,41 +68,40 @@ namespace CS_sample
         {
             // e.AdPlayable - true if an ad is available to play, false otherwise
             // e.Placement  - placement ID in string
-            System.Diagnostics.Debug.WriteLine("OnAdPlayable: " + e.Placement + " - " + e.AdPlayable);
+            Debug.WriteLine("OnAdPlayable: " + e.Placement + " - " + e.AdPlayable);
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() => ChangePlayButtonState(e.AdPlayable, e.Placement)));
         }
 
         // Event Handler called before playing an ad
         private void SdkInstance_OnAdStart(object sender, AdEventArgs e)
         {
-            // e.Id        - Vungle app ID in string
-            // e.Placement - placement ID in string
+            // e.Placement  - placement ID in string
+            // e.CampaignID - campaign ID of ad to be displayd
+            // e.CreativeID - creative ID of ad to be displayd
 
-            System.Diagnostics.Debug.WriteLine("OnAdStart(" + e.Id + "): " + e.Placement);
+            Debug.WriteLine("OnAdStart: " + e.Placement);
+            Debug.WriteLine("OnAdStart: Campaign ID " + e.CampaignID + ", Creative ID " + e.CreativeID + " will be displayed");
         }
 
         // Event handler called when the user leaves ad and control is return to the hosting app
         private void SdkInstance_OnAdEnd(object sender, AdEndEventArgs e)
         {
-            // e.Id                  - Vungle app ID in string
             // e.Placement           - placement ID in string
             // e.IsCompletedView     - true when 80% or more of the video was watched
             // e.CallToActionClicked - true when the user has clicked download button on end card
             // e.WatchedDuration     - duration of video watched
-            // e.VideoDuration       - DEPRECATED
 
-            System.Diagnostics.Debug.WriteLine("OnVideoEnd(" + e.Id + "): " +
-               "\n\tPlacement: " + e.Placement +
-               "\n\tIsCompletedView: " + e.IsCompletedView +
-               "\n\tCallToActionClicked: " + e.CallToActionClicked +
-               "\n\tWatchedDuration: " + e.WatchedDuration +
-               "\n\tMSFTNotify: " + e.MSFTNotify);
+            Debug.WriteLine("OnVideoEnd: " + e.Placement +
+                            "\n\tIsCompletedView: " + e.IsCompletedView +
+                            "\n\tCallToActionClicked: " + e.CallToActionClicked +
+                            "\n\tWatchedDuration: " + e.WatchedDuration +
+                            "\n\tMSFTNotify: " + e.MSFTNotify);
         }
 
         // Event handler called when SDK wants to print diagnostic logs
         private void SdkInstance_Diagnostic(object sender, DiagnosticLogEvent e)
         {
-            System.Diagnostics.Debug.WriteLine(e.Level + " " + e.Type + " " + e.Exception + " " + e.Message);
+            Debug.WriteLine(e.Level + " " + e.Type + " " + e.Exception + " " + e.Message);
         }
 
         private void InitSDK_Click(Object sender, RoutedEventArgs e)
@@ -110,10 +110,10 @@ namespace CS_sample
             VungleSDKConfig sdkConfig = new VungleSDKConfig();
 
             // Set minimum disk space required to initialize or load ads (in bytes)
-            //sdkConfig.MinimumDiskSpaceForAd = 50 * 1024;
-            //sdkConfig.MinimumDiskSpaceForInit = 50 * 1024;
+            //sdkConfig.MinimumDiskSpaceForAd = 50 * 1024 * 1024;
+            //sdkConfig.MinimumDiskSpaceForInit = 50 * 1024 * 1024;
 
-            //Disable tracking of Hardare ID
+            // Disable tracking of Hardare ID
             //sdkConfig.DisableAshwidTracking = true;
 
             sdkConfig.DisableBannerRefresh = false;
@@ -125,7 +125,7 @@ namespace CS_sample
 
             sdkInstance.UpdateConsentStatus(VungleConsentStatus.VungleConsentAccepted, "1.0");
 
-            //Register event handlers
+            // Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
             sdkInstance.OnAdStart += SdkInstance_OnAdStart;
             sdkInstance.OnAdEnd += SdkInstance_OnAdEnd;
@@ -137,34 +137,27 @@ namespace CS_sample
 
         private void LoadPlacement2_Click(Object sender, RoutedEventArgs e)
         {
-            //Load ad for placement2
             sdkInstance.LoadAd(placement2);
         }
 
         private void LoadPlacement3_Click(Object sender, RoutedEventArgs e)
         {
-            //Load ad for placement3
             sdkInstance.LoadAd(placement3);
         }
 
         private async void PlayPlacement1_Click(Object sender, RoutedEventArgs e)
         {
-            //Play ad for placement1
             await sdkInstance.PlayAdAsync(new AdConfig(), placement1);
         }
 
-        //plays in native container
         private async void PlayPlacement2_Click(Object sender, RoutedEventArgs e)
         {
-            //Play ad for placement2
+            // Play ad in a native container using VungleAdControl
             embeddedControl.AppID = appID;
-            embeddedControl.Placements = placement1 + "," + placement2 + "," + placement3;
             embeddedControl.Placement = placement2;
             embeddedControl.SoundEnabled = false;
-
             embeddedControl.OnAdStart += Embedded_OnAdStart;
             embeddedControl.OnAdEnd += Embedded_OnAdEnd;
-
             embeddedControl.AdConfig.Volume = 1.0;
 
             var nEmb = await embeddedControl.PlayAdAsync();
@@ -172,7 +165,7 @@ namespace CS_sample
 
         private async void PlayPlacement3_Click(Object sender, RoutedEventArgs e)
         {
-            //Play ad for placement3
+            // Play rewarded ad with ad configuration
             AdConfig adConfig = new AdConfig();
 
             adConfig.IncentivizedDialogBody = "VBody";
