@@ -1,5 +1,10 @@
 ## Changelog
 
+### VERSION 6.10.1
+* In-App Bidding Support - Window SDK's first version of in-app bidding with support for enhancement in caching: Multi-Token Cache
+* Deprecation of Windows 8.1 Support – removed support for legacy Windows 8.1 devices in preparation for the upcoming Windows 11 release
+* Stability improvements
+
 ### VERSION 6.8.0
 * Stability improvements
 
