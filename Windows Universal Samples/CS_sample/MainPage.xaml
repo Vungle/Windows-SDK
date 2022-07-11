@@ -100,7 +100,6 @@
                 FontWeight="Bold"
                 Width="100">
             </Button>
-            <UI:VungleAdControl x:Name="embeddedControl" Height="1" Width="300"/>
             <Grid 
                 Background="#FFcbd0d3"
                 Height="1"
