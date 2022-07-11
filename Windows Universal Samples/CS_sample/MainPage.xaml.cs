@@ -116,14 +116,22 @@ namespace CS_sample
             // Disable tracking of Hardare ID
             //sdkConfig.DisableAshwidTracking = true;
 
-            sdkConfig.DisableBannerRefresh = false;
+            // Disable automatic banner refresh
+            //sdkConfig.DisableBannerRefresh = true;
+
+            // GDPR example usage
+            //sdkInstance.UpdateConsentStatus(VungleConsentStatus.VungleConsentAccepted, "1.0");
+
+            // CCPA example usage
+            //AdFactory.UpdateCcpaStatus(CcpaConsentStatus.OptedIn)
+
+            // COPPA example usage
+            //AdFactory.UpdateCoppaStatus(true)
 
             // Obtain Vungle SDK instance
             sdkInstance = AdFactory.GetInstance(appID, sdkConfig);
 
             this.vungleBannerControl.AppID = appID;
-
-            sdkInstance.UpdateConsentStatus(VungleConsentStatus.VungleConsentAccepted, "1.0");
 
             // Register event handlers
             sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged;
@@ -152,15 +160,12 @@ namespace CS_sample
 
         private async void PlayPlacement2_Click(Object sender, RoutedEventArgs e)
         {
-            // Play ad in a native container using VungleAdControl
-            embeddedControl.AppID = appID;
-            embeddedControl.Placement = placement2;
-            embeddedControl.SoundEnabled = false;
-            embeddedControl.OnAdStart += Embedded_OnAdStart;
-            embeddedControl.OnAdEnd += Embedded_OnAdEnd;
-            embeddedControl.AdConfig.Volume = 1.0;
+            // Play interstitial ad with ad configuration
+            AdConfig adConfig = new AdConfig();
 
-            var nEmb = await embeddedControl.PlayAdAsync();
+            adConfig.SoundEnabled = false;
+
+            await sdkInstance.PlayAdAsync(adConfig, placement2);
         }
 
         private async void PlayPlacement3_Click(Object sender, RoutedEventArgs e)
@@ -198,40 +203,6 @@ namespace CS_sample
             {
                 PlayPlacement3.IsEnabled = adPlayable;
             }
-        }
-
-        private void AnimateHeight(double value)
-        {
-            var anim = new DoubleAnimation()
-            {
-                From = embeddedControl.Height,
-                To = value,
-                Duration = TimeSpan.FromMilliseconds(500),
-                EnableDependentAnimation = true
-            };
-            Storyboard.SetTarget(anim, embeddedControl);
-            Storyboard.SetTargetProperty(anim, "Height");
-            var sb = new Storyboard();
-            sb.Children.Add(anim);
-            sb.Begin();
-        }
-
-        // Event Handler called before playing an ad
-        private void Embedded_OnAdStart(object sender, AdEventArgs e)
-        {
-            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                AnimateHeight(250);
-            });
-        }
-
-        // Event handler called when the user leaves ad and control is return to the hosting app
-        private void Embedded_OnAdEnd(object sender, AdEndEventArgs e)
-        {
-            var nowait = Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                AnimateHeight(1);
-            });
         }
     }
 }

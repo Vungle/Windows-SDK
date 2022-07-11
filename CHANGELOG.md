@@ -1,5 +1,12 @@
 ## Changelog
 
+### VERSION 6.11.0
+* In-App bidding enhancements
+* COPPA API support (advanced setting)
+* Support of Windows 11
+* Support of ARM64
+* Publisher will be required to set their minimum version to Windows 10 Fall Creators Update (10.0; Build 16299)
+
 ### VERSION 6.10.1
 * In-App Bidding Support - Window SDK's first version of in-app bidding with support for enhancement in caching: Multi-Token Cache
 * Deprecation of Windows 8.1 Support – removed support for legacy Windows 8.1 devices in preparation for the upcoming Windows 11 release
