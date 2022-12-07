@@ -1,5 +1,9 @@
 ## Changelog
 
+### VERSION 6.11.1 (December 7, 2022)
+* In-App Bidding Support - the Window SDK's latest version of in-app bidding with support for Realtime Ads
+* Stability Improvements
+
 ### VERSION 6.11.0
 * In-App bidding enhancements
 * COPPA API support (advanced setting)
